@@ -1,19 +1,22 @@
 "use client";
-import { movieType } from "@/app/types/websiteTypes";
+import { ShowType } from "@/app/types/websiteTypes";
 import React, { useEffect, useState } from "react";
-import VerticalSlider from "../../_client/Sliders/VerticalSlider";
 import { useData } from "@/app/context/DataContext";
 import { gener } from "@/app/types/ContextType";
-import CurrentMovieComponent from "../../_client/CurrentMovieComponent";
+import CurrentSlideComponent from "../../_client/CurrentSlideComponent";
+import { useVariables } from "@/app/context/VariablesContext";
+import { motion } from "framer-motion";
+import SliderTrending from "../../_client/Sliders/SliderTrending";
 
 interface props {
-  data: movieType[];
+  data: ShowType[];
 }
 
 export default function TrendingMovies({ data }: props) {
   const { genres } = useData();
+  const { trendingState } = useVariables();
   const [currentSlideId, setcurrentSlideId] = useState<number | null>(null);
-  const [currentMovie, setCurrentMovie] = useState<movieType>(data[0]);
+  const [currentMovie, setCurrentMovie] = useState<ShowType>(data[0]);
   const [movieGenres, setMovieGenres] = useState<gener[] | undefined>([]);
 
   useEffect(() => {
@@ -35,16 +38,23 @@ export default function TrendingMovies({ data }: props) {
 
   return (
     <>
-      <div className="xl:w-[90%] w-[98%]  border  border-gray-700  shadow-md mx-auto h-fit xl:h-[75vh] bg-thired_dash relative rounded-md flex items-start max-xl:flex-col-reverse max-xl:gap-4">
-        {/* المحتوى */}
-        <CurrentMovieComponent
-          currentMovie={currentMovie}
-          movieGenres={movieGenres}
-        />
+      {trendingState === "movies" && (
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: "easeOut" }}
+          className="xl:w-[90%] w-[98%] border border-gray-700 shadow-md mx-auto h-fit xl:h-[75vh] bg-thired_dash relative rounded-md flex items-start max-xl:flex-col-reverse max-xl:gap-4 mb-12"
+        >
+          {/* Movie Content */}
+          <CurrentSlideComponent
+            currentMovie={currentMovie}
+            movieGenres={movieGenres}
+          />
 
-        {/* السلايدر يبقى ثابت بدون حركة */}
-        <VerticalSlider data={data} setCurrent={setcurrentSlideId} />
-      </div>
+          {/* Slider Of Movies */}
+          <SliderTrending data={data} setCurrent={setcurrentSlideId} />
+        </motion.div>
+      )}
     </>
   );
 }

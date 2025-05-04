@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export const Genre1 = [
   "Action",
   "Adventure",
@@ -26,19 +24,13 @@ export const Genre2 = [
 
 export const opation_nav = [
   "About us",
-  <Link href="/dashbord" key={"key"}>
-    profile
-  </Link>,
+  "profile",
   "Contacts",
   "Interview",
   "Admin pages",
   "Privacy policy",
-  <Link href="/signin" key={"key"}>
-    Sign in
-  </Link>,
-  <Link href="/signup" key={"key"}>
-    Sign up
-  </Link>,
+  "Sign in",
+  "Sign up",
   "Forgot password",
   "404 Page",
 ];
@@ -65,14 +57,6 @@ export const opation_about = [
   "Contacts",
 ];
 
-export const prof_opation = [
-  <Link href={"/dashbord"} key="key">
-    Profile
-  </Link>,
-
-  <div key="key">Logout</div>,
-];
-
 export const dash_navs = [
   {
     title: "Profile",
@@ -92,10 +76,29 @@ export const dash_navs = [
   },
 ];
 
-/// styles for classes
+// النصوص المشتركة
+export const sharedOptions = [
+  "FlixTV Originals",
+  "Switch plans or cancel anytime",
+  "Stream 65+ top Live",
+  "TV channels",
+];
 
-export const Styles = {
-  h1: "px-12 max-sm:px-4 py-2 duration-300 font-bold  border cursor-pointer text-white rounded-md w-fit",
-  shadow_light:
-    "0px 10px 15px -3px #2f80ed,0px 10px 15px -3px #2f80ed,0px 10px 15px -3px #2f80ed",
-};
+// حالة كل خيار حسب نوع الخطة
+export const plans = [
+  {
+    title: "Reguler",
+    price: 11.99,
+    icons: [true, true, false, false],
+  },
+  {
+    title: "Premium",
+    price: 34.99,
+    icons: [true, true, true, false],
+  },
+  {
+    title: "Premium + TV channels",
+    price: 49.99,
+    icons: [true, true, true, true],
+  },
+];

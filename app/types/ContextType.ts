@@ -7,6 +7,7 @@ export interface gener {
 
 export interface DataContextType {
   genres: gener[];
+  genres_Shows: gener[];
 }
 
 export interface VariablesTypes {
@@ -18,6 +19,7 @@ export interface VariablesTypes {
   setScrollY: Dispatch<SetStateAction<number>>;
   trendingState: "movies" | "shows";
   setTrendingState: Dispatch<SetStateAction<"movies" | "shows">>;
-  trendingStatus: string;
-  setTrendingStatus: Dispatch<SetStateAction<"movies" | "shows">>;
+  SearchbarState: boolean;
+  setSearchbarState: Dispatch<SetStateAction<boolean>>;
+  width: number;
 }

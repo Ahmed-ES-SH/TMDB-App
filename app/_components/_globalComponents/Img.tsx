@@ -8,6 +8,7 @@ interface props {
   width?: number;
   height?: number;
   loading?: "lazy" | "eager" | undefined;
+  priority?: boolean;
 }
 
 export default function Img({
@@ -17,6 +18,7 @@ export default function Img({
   height = 1280,
   alt = "image",
   loading = "lazy",
+  priority = false,
 }: props) {
   return (
     <>
@@ -27,6 +29,7 @@ export default function Img({
         width={width}
         height={height}
         loading={loading}
+        priority={priority}
       />
     </>
   );

@@ -3,8 +3,8 @@ import { useVariables } from "@/app/context/VariablesContext";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import React from "react";
-import { BiDotsHorizontalRounded } from "react-icons/bi";
 import { FaCircle } from "react-icons/fa";
+import DotsNavbar from "../_client/DotsNavbar";
 
 export default function MobailLinks() {
   const { showMobail } = useVariables();
@@ -16,7 +16,7 @@ export default function MobailLinks() {
           animate={{ height: "230px", opacity: 1 }}
           exit={{ height: 0, opacity: 0 }}
           transition={{ duration: 0.3, ease: "easeIn" }}
-          className="max-md:w-full w-[80%] max-lg:w-[95%] bg-thired_dash mx-auto border-b border-gray-300 p-4 overflow-hidden"
+          className="max-md:w-full w-[80%] max-lg:w-[95%] bg-secondery_dash mx-auto border-b border-gray-300 p-4 "
         >
           <div className="flex flex-col gap-4">
             <Link
@@ -41,7 +41,7 @@ export default function MobailLinks() {
             >
               Pricing plans
             </Link>
-            <BiDotsHorizontalRounded className="text-white size-6 cursor-pointer hover:text-primary_blue duration-300" />
+            <DotsNavbar />
           </div>
         </motion.div>
       )}

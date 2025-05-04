@@ -6,13 +6,16 @@ import { DataContextType, gener } from "../types/ContextType";
 type Props = {
   children: ReactNode;
   genres: gener[];
+  genres_Shows: gener[];
 };
 
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
-const DataProvider = ({ children, genres }: Props) => {
+const DataProvider = ({ children, genres, genres_Shows }: Props) => {
   return (
-    <DataContext.Provider value={{ genres }}>{children}</DataContext.Provider>
+    <DataContext.Provider value={{ genres, genres_Shows }}>
+      {children}
+    </DataContext.Provider>
   );
 };
 

@@ -2,18 +2,18 @@ import React from "react";
 // import TrendingDataShow from "./TrendingDataShow";
 import TrendingHeader from "../../_client/TrendingHeader";
 import TrendingMovies from "./TrendingMovies";
-import FetchData from "@/app/helpers/FetchData";
-import { trendingMovies } from "@/app/constants/apis";
+import FetchData from "@/app/hooks/FetchData";
+import { trendingMovies, trendingShows } from "@/app/constants/apis";
+import TrendingShows from "./TrendingShows";
 
 export default async function HeroSection() {
   const { results } = await FetchData(trendingMovies, false);
+  const { results: showsResults } = await FetchData(trendingShows, false);
   return (
     <>
       <TrendingHeader />
-      <div className="h-fit w-full flex items-center justify-center  mb-12">
-        <TrendingMovies data={results} />
-        {/* <TrendingShows data={showsResults} /> */}
-      </div>
+      <TrendingMovies data={results} />
+      <TrendingShows data={showsResults} />
     </>
   );
 }

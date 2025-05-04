@@ -1,11 +1,11 @@
 import React from "react";
 import Img from "../../_globalComponents/Img";
-import { movieType } from "@/app/types/websiteTypes";
+import { ShowType } from "@/app/types/websiteTypes";
 import { gener } from "@/app/types/ContextType";
 import { MdOutlineStarBorderPurple500 } from "react-icons/md";
 import { FaHeart, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 interface props {
-  movie: movieType;
+  movie: ShowType;
   genres: gener[];
   height?: string;
 }

@@ -1,5 +1,5 @@
 "use client";
-import { movieType } from "@/app/types/websiteTypes";
+import { ShowType } from "@/app/types/websiteTypes";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import Img from "../_globalComponents/Img";
@@ -7,9 +7,10 @@ import { FaLanguage, FaStar } from "react-icons/fa";
 import { CiCalendarDate } from "react-icons/ci";
 import { TbChartBarPopular } from "react-icons/tb";
 import { gener } from "@/app/types/ContextType";
+import { useVariables } from "@/app/context/VariablesContext";
 
 interface props {
-  currentMovie: movieType;
+  currentMovie: ShowType;
   movieGenres: gener[] | undefined;
 }
 
@@ -19,10 +20,11 @@ type btntype = {
   handle: () => void;
 };
 
-export default function CurrentMovieComponent({
+export default function CurrentSlideComponent({
   currentMovie,
   movieGenres,
 }: props) {
+  const { trendingState } = useVariables();
   const btns: btntype[] = [
     {
       bg_color: "bg-yellow-400 ", // لون يدل على الحفظ أو الإضافة للقائمة
@@ -36,7 +38,7 @@ export default function CurrentMovieComponent({
     },
     {
       bg_color: "bg-blue-600 ", // لون يدل على الحركة أو المتابعة
-      text: "Go to movie",
+      text: `Go to ${trendingState == "movies" ? "Movie" : "Show"}`,
       handle: () => console.log("Go to movie"),
     },
   ];
@@ -44,7 +46,11 @@ export default function CurrentMovieComponent({
   const movieDetails = [
     {
       icon: <CiCalendarDate className="text-primary_blue xl:size-6 size-5 " />,
-      value: new Date(currentMovie?.release_date ?? "2000-01-01").getFullYear(),
+      value: new Date(
+        currentMovie?.release_date ||
+          currentMovie?.first_air_date ||
+          "2000-01-01"
+      ).getFullYear(),
     },
     {
       icon: (
@@ -66,7 +72,7 @@ export default function CurrentMovieComponent({
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
           transition={{ duration: 0.6 }}
-          className="movie flex flex-col items-start gap-10 w-full xl:w-3/4 xl:h-full h-1/2 px-6 py-2 relative z-10 pb-4"
+          className="movie flex flex-col items-start gap-10 w-full xl:w-3/4 xl:h-full h-1/2 lg:px-6 px-2 py-2 relative z-10 pb-4"
         >
           <motion.div
             key={currentMovie?.backdrop_path}
@@ -91,8 +97,9 @@ export default function CurrentMovieComponent({
             className="flex items-center justify-between mt-4 w-full"
           >
             <h1 className="italic font-bold text-secondery-green text-2xl md:text-4xl xl:text-6xl font-mono">
-              {currentMovie?.title}
+              {currentMovie?.title || currentMovie?.name}
             </h1>
+
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
@@ -121,7 +128,7 @@ export default function CurrentMovieComponent({
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.5 }}
-            className="flex items-center gap-12"
+            className="flex items-center gap-12 flex-wrap"
           >
             {movieDetails.map((item, index) => (
               <motion.div
@@ -129,7 +136,7 @@ export default function CurrentMovieComponent({
                 initial={{ opacity: 0, y: 10 * (index + 1) }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 + index * 0.1 }}
-                className="flex items-center gap-2"
+                className="flex items-center  gap-2"
               >
                 {item.icon}
                 <span className="text-white xl:text-xl text-[17px]">
@@ -164,7 +171,7 @@ export default function CurrentMovieComponent({
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1 }}
-            className="w-fit ml-auto flex items-center gap-4 mt-auto"
+            className="w-fit ml-auto flex items-center flex-wrap gap-4 mt-auto"
           >
             {btns.map((btn, index) => (
               <motion.div

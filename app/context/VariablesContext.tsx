@@ -4,26 +4,32 @@ import { VariablesTypes } from "../types/ContextType";
 
 const Variables = createContext<VariablesTypes | undefined>(undefined);
 
-const VaribalesProvider = ({ children }) => {
-  const [show, setShow] = useState(true);
-  const [showMobail, setShowMobail] = useState(false);
-  const [scrollY, setScrollY] = useState(0);
+interface Props {
+  children: React.ReactNode;
+}
+
+export default function VaribalesProvider({ children }: Props) {
+  const [width, setWidth] = useState<number>(0);
+  const [scrollY, setScrollY] = useState<number>(0);
+  const [show, setShow] = useState<boolean>(true);
+  const [showMobail, setShowMobail] = useState<boolean>(false);
   const [trendingState, setTrendingState] = useState<"movies" | "shows">(
     "movies"
   );
-  const [trendingStatus, setTrendingStatus] = useState<"movies" | "shows">(
-    "movies"
-  );
+  const [SearchbarState, setSearchbarState] = useState<boolean>(false);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
+    // تحديد القيمة مبدئياً عند تشغيل الكومبوننت (على العميل فقط)
+    const handleResize = () => setWidth(window.innerWidth);
+    const handleScroll = () => setScrollY(window.scrollY);
 
+    handleResize(); // تعيين القيمة فورًا عند تشغيل
+
+    window.addEventListener("resize", handleResize);
     window.addEventListener("scroll", handleScroll);
 
-    // تنظيف الحدث عند الخروج من المكون
     return () => {
+      window.removeEventListener("resize", handleResize);
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
@@ -38,16 +44,15 @@ const VaribalesProvider = ({ children }) => {
         setScrollY,
         trendingState,
         setTrendingState,
-        trendingStatus,
-        setTrendingStatus,
+        SearchbarState,
+        setSearchbarState,
+        width,
       }}
     >
       {children}
     </Variables.Provider>
   );
-};
-
-export default VaribalesProvider;
+}
 
 export const useVariables = () => {
   const context = useContext(Variables);

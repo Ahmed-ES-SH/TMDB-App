@@ -1,21 +1,21 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { movieType } from "@/app/types/websiteTypes";
+import { Swiper as SwiperType } from "swiper";
+import { ShowType } from "@/app/types/websiteTypes";
 import { Virtual, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useData } from "@/app/context/DataContext";
+import SliderCard from "../../_website/_movies/SliderCard";
 import "swiper/css";
 import "swiper/css/virtual";
-import SliderMovieCard from "../../_website/_movies/SliderMovieCard";
 
 interface props {
-  data: movieType[];
+  data: ShowType[];
   setCurrent: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-export default function VerticalSlider({ data, setCurrent }: props) {
-  const swiperRef = useRef<any>(null);
+export default function SliderTrending({ data, setCurrent }: props) {
+  const swiperRef = useRef<SwiperType | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [movieId, setMovieId] = useState<number | null>(null);
   const { genres } = useData();
@@ -50,8 +50,12 @@ export default function VerticalSlider({ data, setCurrent }: props) {
             slidesPerView: 2,
             spaceBetween: 20,
           },
-          640: {
+          620: {
             slidesPerView: 3,
+            spaceBetween: 30,
+          },
+          640: {
+            slidesPerView: 4,
             spaceBetween: 30,
           },
           1280: {
@@ -59,7 +63,7 @@ export default function VerticalSlider({ data, setCurrent }: props) {
           },
         }}
       >
-        {data.map((movie: movieType, index) => {
+        {data.map((movie: ShowType | ShowType, index) => {
           const matchedGenres =
             genres &&
             movie &&
@@ -73,7 +77,7 @@ export default function VerticalSlider({ data, setCurrent }: props) {
               virtualIndex={index}
               onClick={() => handleCurrentSlide(movie.id)}
             >
-              <SliderMovieCard
+              <SliderCard
                 height="h-full"
                 movie={movie}
                 genres={matchedGenres}

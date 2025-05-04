@@ -10,7 +10,6 @@ It allows users to discover trending movies and TV shows, view detailed informat
 - 🔥 Browse trending **movies** and **TV shows**
 - 🎞️ View detailed pages: overview, rating, language, popularity, and genres
 - ⭐ Add items to **Watch List** or mark them as **Watched**
-- 🌐 Supports **English** and **Arabic** languages
 - 🎨 Smooth animations with **Framer Motion**
 - 📱 Fully responsive design for all devices
 
@@ -18,13 +17,12 @@ It allows users to discover trending movies and TV shows, view detailed informat
 
 ## 🛠️ Tech Stack
 
-- [Next.js 14](https://nextjs.org/)
+- [Next.js 15.3.1](https://nextjs.org/)
 - [TypeScript](https://www.typescriptlang.org/)
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Framer Motion](https://www.framer.com/motion/)
 - [TMDb API](https://developer.themoviedb.org/docs)
 - [React Icons](https://react-icons.github.io/react-icons/)
-- [next-intl](https://next-intl-docs.vercel.app/) for i18n
 
 ---
 
@@ -44,11 +42,9 @@ http://localhost:3000
 
 
 /app              - App Router structure
-/components       - Reusable UI components
+/_components       - Reusable UI components
 /context          - Global state context
 /hooks            - Custom React hooks
-/styles           - Tailwind configuration and global styles
-/translations     - JSON files for multilingual support
 ```
 
 This project is licensed under the MIT License.

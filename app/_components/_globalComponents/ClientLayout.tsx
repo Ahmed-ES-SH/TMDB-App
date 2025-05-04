@@ -7,13 +7,20 @@ import React, { ReactNode } from "react";
 type ClientLayoutProps = {
   children: ReactNode;
   genres: gener[];
+  genres_Shows: gener[];
 };
 
-export default function ClientLayout({ children, genres }: ClientLayoutProps) {
+export default function ClientLayout({
+  children,
+  genres,
+  genres_Shows,
+}: ClientLayoutProps) {
   return (
     <>
       <VaribalesProvider>
-        <DataProvider genres={genres}>{children}</DataProvider>
+        <DataProvider genres={genres} genres_Shows={genres_Shows}>
+          {children}
+        </DataProvider>
       </VaribalesProvider>
     </>
   );

@@ -1,8 +1,8 @@
 import { TopratedMovies } from "@/app/constants/apis";
-import FetchData from "@/app/helpers/FetchData";
+import FetchData from "@/app/hooks/FetchData";
 import React from "react";
 import MovieCard from "./MovieCard";
-import getGenres from "@/app/helpers/FetchGenres";
+import getGenres from "@/app/hooks/FetchGenres";
 import MotionDiv from "../../_globalComponents/MotionDiv";
 
 export default async function TopMovies() {

@@ -4,8 +4,8 @@ import Navbar from "./_components/_globalComponents/Navbar";
 import Footer from "./_components/_globalComponents/Footer";
 import ClientLayout from "./_components/_globalComponents/ClientLayout";
 import "./globals.css";
-import FetchData from "./helpers/FetchData";
-import { genersMovies } from "./constants/apis";
+import FetchData from "./hooks/FetchData";
+import { genersMovies, genresShows } from "./constants/apis";
 
 const FontRoboto = Roboto({
   subsets: ["latin"],
@@ -13,8 +13,8 @@ const FontRoboto = Roboto({
 });
 
 export const metadata: Metadata = {
-  title: "FLIX Tv",
-  description: "FLIX Tv",
+  title: "FlixTV – Movies & TV Shows, Online cinema",
+  description: "FlixTV – Movies & TV Shows, Online cinema",
 };
 
 export default async function RootLayout({
@@ -23,10 +23,11 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const { genres } = await FetchData(genersMovies, false);
+  const { genres: genres_Shows } = await FetchData(genresShows, false);
   return (
     <html lang="en">
       <body className={`${FontRoboto.className} antialiased`}>
-        <ClientLayout genres={genres}>
+        <ClientLayout genres={genres} genres_Shows={genres_Shows}>
           <Navbar />
           {children}
           <Footer />
