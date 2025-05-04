@@ -17,6 +17,9 @@ export default function VaribalesProvider({ children }: Props) {
     "movies"
   );
   const [SearchbarState, setSearchbarState] = useState<boolean>(false);
+  const [currentCategory, setCurrentCategory] = useState<
+    "Popular" | "Upcoming" | "now_playing"
+  >("Popular");
 
   useEffect(() => {
     // تحديد القيمة مبدئياً عند تشغيل الكومبوننت (على العميل فقط)
@@ -47,6 +50,8 @@ export default function VaribalesProvider({ children }: Props) {
         SearchbarState,
         setSearchbarState,
         width,
+        currentCategory,
+        setCurrentCategory,
       }}
     >
       {children}

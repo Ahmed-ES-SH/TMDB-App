@@ -9,7 +9,7 @@
   --secondery: #eaa71c;
   --primary_dash: #38444f;
   --secondery_dash: #1f2937;
-  --thired_dash: #0f172a;
+  --thired_dash: #131720;
   --fourth_color: #151f30;
   --main_bg: #131720;
   --second_text: #94a3b8;
@@ -127,7 +127,7 @@
 
 @layer components {
   .custom-container {
-    @apply xl:w-[80%] lg:w-[95%] w-full mx-auto p-4 max-md:p-2;
+    @apply xl:w-[80%] lg:w-[95%] w-[95%] mx-auto p-4 max-md:p-2;
   }
 }
 

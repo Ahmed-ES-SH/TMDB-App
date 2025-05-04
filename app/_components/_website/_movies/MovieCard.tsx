@@ -4,27 +4,35 @@ import { ShowType } from "@/app/types/websiteTypes";
 import { gener } from "@/app/types/ContextType";
 import { MdOutlineStarBorderPurple500 } from "react-icons/md";
 import { FaHeart, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import Link from "next/link";
+import { formatTitle } from "@/app/_helpers/helpers";
+import { motion } from "framer-motion";
 interface props {
   movie: ShowType;
   genres: gener[];
   height?: string;
+  index: number;
 }
 
 export default function MovieCard({
   movie,
   genres,
   height = "h-[500px]",
+  index,
 }: props) {
   const isMany = genres && genres.length > 5 ? true : false;
   const MovieYear = new Date(movie.release_date).getFullYear();
   return (
     <>
-      <div
-        className={`w-full relative cursor-pointer group overflow-hidden ${height} `}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3, delay: index * 1.5 }}
+        className={`w-full relative cursor-pointer group rounded-md overflow-hidden ${height} `}
       >
         <Img
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-          className="absolute top-0 left-0 w-full h-full object-cover "
+          className="absolute top-0 left-0 w-full h-full rounded-md object-cover "
         />
         <div className="w-0 h-full overflow-hidden group-hover:w-full duration-500 absolute top-0 left-0 bg-black/60 rounded-md"></div>
         {/* Head Line & Rate + Faveroit List  */}
@@ -57,11 +65,14 @@ export default function MovieCard({
         </div>
         {/* Movie Title + release_date */}
         <div className="flex flex-col gap-2 items-center justify-center w-fit mx-auto absolute -bottom-[20%] group-hover:bottom-[12%] duration-700 left-1/2 -translate-x-1/2">
-          <h2 className="text-xl text-gray-200 whitespace-nowrap hover:text-sky-400 duration-200">
+          <Link
+            href={`/movies/${formatTitle(movie.title)}?CurrentId=${movie.id}`}
+            className="text-xl text-gray-200 whitespace-nowrap hover:text-sky-400 duration-200"
+          >
             {movie.title.length > 20
               ? movie.title.slice(0, 20) + "..."
               : movie.title}
-          </h2>
+          </Link>
           <p className="text-[14px] text-orange-400 font-bold">{MovieYear}</p>
         </div>
         {/* Watched List + Watch List  & btns */}
@@ -73,7 +84,7 @@ export default function MovieCard({
             <FaRegEyeSlash className="size-6 text-white group-hover/heart:text-black duration-300" />
           </div>
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

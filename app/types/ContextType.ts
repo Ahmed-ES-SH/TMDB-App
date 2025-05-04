@@ -22,4 +22,8 @@ export interface VariablesTypes {
   SearchbarState: boolean;
   setSearchbarState: Dispatch<SetStateAction<boolean>>;
   width: number;
+  currentCategory: "Popular" | "Upcoming" | "now_playing";
+  setCurrentCategory: Dispatch<
+    SetStateAction<"Popular" | "Upcoming" | "now_playing">
+  >;
 }
