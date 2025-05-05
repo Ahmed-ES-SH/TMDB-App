@@ -44,7 +44,7 @@ export default function Footer() {
               {section.items.map((item) => (
                 <li
                   key={item}
-                  className="p-1 hover:ml-2 hover:text-primary duration-300 cursor-pointer"
+                  className="p-1 hover:ml-2 hover:text-primary_blue duration-300 cursor-pointer"
                 >
                   {item}
                 </li>

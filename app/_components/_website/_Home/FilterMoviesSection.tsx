@@ -1,8 +1,5 @@
 "use client";
-import { useData } from "@/app/context/DataContext";
 import React, { useEffect, useRef, useState } from "react";
-import { IoIosArrowDown } from "react-icons/io";
-import { AnimatePresence, motion } from "framer-motion";
 import { useVariables } from "@/app/context/VariablesContext";
 
 interface categoryType {
@@ -29,15 +26,15 @@ export default function FilterMoviesSection() {
     },
   ];
 
-  const { genres } = useData();
-  const [selectedGenre, setSelectedGenre] = useState<string>("All genres");
+  // const { genres } = useData();
+  // const [selectedGenre, setSelectedGenre] = useState<string>("All genres");
+  // const [dropState, setDropState] = useState(false);
   const [bgStyle, setBgStyle] = useState({ left: 0, width: 0 });
-  const [dropState, setDropState] = useState(false);
 
-  const hnadleselectGenre = (genre: string) => {
-    setSelectedGenre(genre);
-    setDropState(false);
-  };
+  // const hnadleselectGenre = (genre: string) => {
+  //   setSelectedGenre(genre);
+  //   setDropState(false);
+  // };
 
   const hnadleSelectCategory = (
     cat: "Popular" | "Upcoming" | "now_playing"
@@ -56,16 +53,11 @@ export default function FilterMoviesSection() {
     }
   }, [currentCategory]);
 
-  const dropdownVariants = {
-    hidden: { opacity: 0, y: -20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.3 } },
-  };
-
   return (
     <>
       <div className="custom-container h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
         <div className="flex items-center justify-between w-[97%] max-md:w-full mx-auto">
-          <div className="relative">
+          {/* <div className="relative">
             <div
               onClick={() => setDropState((prev) => !prev)}
               className="flex items-center gap-1 text-white hover:text-primary_blue duration-300 cursor-pointer relative"
@@ -73,7 +65,6 @@ export default function FilterMoviesSection() {
               <p className="text-[15px] ">{selectedGenre}</p>
               <IoIosArrowDown className="size-4" />
             </div>
-            {/* Drop Down For Genres */}
             <AnimatePresence>
               {dropState && (
                 <motion.div
@@ -100,10 +91,11 @@ export default function FilterMoviesSection() {
                 </motion.div>
               )}
             </AnimatePresence>
-          </div>
+          </div> */}
+          <div className="hidden lg:block"></div>
           <div
             ref={containerRef}
-            className="flex items-center gap-6 w-fit px-4 py-3 rounded-2xl bg-thired_dash relative"
+            className="flex items-center max-xl:justify-between max-md:w-full gap-6 w-fit px-4 py-3 rounded-2xl bg-thired_dash relative"
           >
             {/* Animation backGround */}
             <div

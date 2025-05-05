@@ -7,6 +7,7 @@ import NavbarDiv from "../_client/NavbarDiv";
 import DotsNavbar from "../_client/DotsNavbar";
 import ResponsiveSearchBar from "../_client/ResponsiveSearchBar";
 import Image from "next/image";
+import InputSearchData from "../_client/InputSearchData";
 
 export default function Navbar() {
   const navLinks = [
@@ -39,14 +40,16 @@ export default function Navbar() {
             <div className="left flex items-center gap-12">
               <div className="flex items-center gap-2 ">
                 <BarsButton />
-                <Image
-                  src="/website/logo.svg"
-                  className="w-24 max-md:w-16"
-                  alt="logo"
-                  width={1024}
-                  height={1280}
-                  priority
-                />
+                <Link href={"/"}>
+                  <Image
+                    src="/website/logo.svg"
+                    className="w-24 max-md:w-16"
+                    alt="logo"
+                    width={1024}
+                    height={1280}
+                    priority
+                  />
+                </Link>
               </div>
               <div id="links" className="xl:flex hidden items-center gap-8">
                 {navLinks.map((item, index) => {
@@ -78,11 +81,7 @@ export default function Navbar() {
             </div>
             <div className="right flex items-center gap-0 lg:gap-4">
               <div className="relative">
-                <input
-                  type="text"
-                  className="hidden lg:block bg-[#151f30] border-2 border-gray-500 rounded-full py-2 w-[300px] 2xl:w-[350px] placeholder:text-gray-200 placeholder:text-[13px] placeholder:px-6 outline-none px-3 text-gray-200 focus:border-sky-300 duration-300"
-                  placeholder="i`m looking for ..."
-                />
+                <InputSearchData />
                 <ResponsiveSearchBar />
               </div>
               <Link href={"/signin"} className="flex items-center gap-2 group ">

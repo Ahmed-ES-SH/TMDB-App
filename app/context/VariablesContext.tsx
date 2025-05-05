@@ -13,6 +13,7 @@ export default function VaribalesProvider({ children }: Props) {
   const [scrollY, setScrollY] = useState<number>(0);
   const [show, setShow] = useState<boolean>(true);
   const [showMobail, setShowMobail] = useState<boolean>(false);
+  const [trailerState, setTrailerState] = useState(false);
   const [trendingState, setTrendingState] = useState<"movies" | "shows">(
     "movies"
   );
@@ -52,6 +53,8 @@ export default function VaribalesProvider({ children }: Props) {
         width,
         currentCategory,
         setCurrentCategory,
+        trailerState,
+        setTrailerState,
       }}
     >
       {children}

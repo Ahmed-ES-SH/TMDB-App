@@ -7,7 +7,6 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { useData } from "@/app/context/DataContext";
 import SliderCard from "../../_website/_movies/SliderCard";
 import "swiper/css";
-import "swiper/css/virtual";
 
 interface props {
   data: ShowType[];
@@ -36,7 +35,6 @@ export default function SliderTrending({ data, setCurrent }: props) {
     <div className="w-1/4 max-xl:w-full max-lg:h-[35vh] lg:h-[45vh]  xl:h-full max-xl:p-2 overflow-hidden">
       <Swiper
         className="w-full h-full "
-        virtual
         modules={[Virtual, Autoplay]}
         autoplay={{
           delay: 4500,

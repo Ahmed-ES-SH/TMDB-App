@@ -20,14 +20,16 @@ export default function MovieCard({
   height = "h-[500px]",
   index,
 }: props) {
-  const isMany = genres && genres.length > 5 ? true : false;
-  const MovieYear = new Date(movie.release_date).getFullYear();
+  const MovieYear = new Date(
+    movie.release_date || movie.first_air_date
+  ).getFullYear();
+  const movieTitle = movie.title || movie.name;
   return (
     <>
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3, delay: index * 1.5 }}
+        transition={{ duration: 0.3, delay: index * 0.2 }}
         className={`w-full relative cursor-pointer group rounded-md overflow-hidden ${height} `}
       >
         <Img
@@ -49,12 +51,10 @@ export default function MovieCard({
         </div>
         {/* genres div */}
         <div
-          className={`flex flex-col group-hover:left-0 items-start absolute top-0 -left-[50%] -translate-y-1/2 duration-700 gap-3 ${
-            isMany ? "group-hover:top-2" : "group-hover:top-1/2 "
-          }`}
+          className={`flex flex-col group-hover:left-0 items-start absolute top-0 -left-[50%] -translate-y-1/2 duration-700 gap-3 group-hover:top-1/2 `}
         >
           {genres &&
-            genres.map((genre, index) => (
+            genres.slice(0, 4).map((genre, index) => (
               <div
                 key={index}
                 className="py-2 px-4 bg-secondery-green text-gray-200 rounded-r-md hover:bg-white hover:text-black duration-200 cursor-pointer"
@@ -66,12 +66,14 @@ export default function MovieCard({
         {/* Movie Title + release_date */}
         <div className="flex flex-col gap-2 items-center justify-center w-fit mx-auto absolute -bottom-[20%] group-hover:bottom-[12%] duration-700 left-1/2 -translate-x-1/2">
           <Link
-            href={`/movies/${formatTitle(movie.title)}?CurrentId=${movie.id}`}
+            href={`/${movie.name ? "shows" : "movies"}/${formatTitle(
+              movie.title || movie.name
+            )}?currentId=${movie.id}`}
             className="text-xl text-gray-200 whitespace-nowrap hover:text-sky-400 duration-200"
           >
-            {movie.title.length > 20
-              ? movie.title.slice(0, 20) + "..."
-              : movie.title}
+            {movieTitle.length > 20
+              ? movieTitle.slice(0, 20) + "..."
+              : movieTitle}
           </Link>
           <p className="text-[14px] text-orange-400 font-bold">{MovieYear}</p>
         </div>

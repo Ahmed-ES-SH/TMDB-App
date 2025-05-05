@@ -18,7 +18,9 @@ export default function ShowMovies() {
   const { genres } = useData();
   const { currentCategory } = useVariables();
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [currentApi, setCurrentApi] = useState<string>("");
+  const [currentApi, setCurrentApi] = useState<string>(
+    `${PopularMovies}page=1`
+  );
 
   // Fetch The Data
   const { data, totalPages, loading } = useFetchData<{
@@ -77,7 +79,12 @@ export default function ShowMovies() {
                   genre.id !== null && movie.genre_ids.includes(genre.id)
               );
             return (
-              <MovieCard key={index} movie={movie} genres={matchedGenres} />
+              <MovieCard
+                index={index}
+                key={index}
+                movie={movie}
+                genres={matchedGenres}
+              />
             );
           })}
       </div>

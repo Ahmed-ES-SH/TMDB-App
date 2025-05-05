@@ -6,7 +6,7 @@ import { RxCross1 } from "react-icons/rx";
 export default function PlansSection() {
   return (
     <>
-      <div className="head custom-container mb-6">
+      <div className="head custom-container my-6 pt-4 border-t border-primary_blue">
         <h1 className="text-5xl font-bold text-white my-2">Select Your Plan</h1>
         <p className="text-white text-xl font-light">
           No hidden fees, equipment rentals, or installation appointments.

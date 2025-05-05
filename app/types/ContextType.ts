@@ -26,4 +26,6 @@ export interface VariablesTypes {
   setCurrentCategory: Dispatch<
     SetStateAction<"Popular" | "Upcoming" | "now_playing">
   >;
+  trailerState: boolean;
+  setTrailerState: Dispatch<SetStateAction<boolean>>;
 }
