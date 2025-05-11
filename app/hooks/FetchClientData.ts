@@ -1,37 +1,15 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { instance } from "../_components/_globalComponents/AxiosTool";
 
-// interface UseFetchDataResult<T> {
-//   data: T | null;
-//   loading: boolean;
-//   error: unknown;
-//   currentPage?: number;
-//   totalPages?: number;
-// }
-
-export default function useFetchData<T>(api: string, pagination: boolean) {
-  const [data, setData] = useState<T | null>(null);
-  const [totalPages, setTotalPages] = useState<number>(1);
-  const [loading, setLoading] = useState<boolean>(false);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setLoading(true);
-        const response = await instance.get(api);
-        setData(response.data);
-        if (pagination) {
-          setTotalPages(response.data.total_pages);
-        }
-      } catch (error) {
-        console.error(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [api, pagination]);
-
-  return { data, totalPages, loading };
+export function useFetchData<T>(api: string, pagination: boolean = false) {
+  return useQuery({
+    queryKey: [api],
+    queryFn: async () => {
+      const response = await instance.get(api);
+      return response.data as T;
+    },
+    staleTime: 1000 * 60 * 5, // ❄️ الكاش يظل صالحًا لمدة 5 دقائق
+    gcTime: 1000 * 60 * 10, // 🧠 يُخزن في الذاكرة لمدة 10 دقائق حتى لو أصبح غير نشط
+  });
+  console.log(pagination);
 }

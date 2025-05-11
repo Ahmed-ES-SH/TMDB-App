@@ -35,3 +35,24 @@ export const getSharedMetadata = (title: string, description: string) => ({
     image: "https://www.flixtv.com/images/twitter-image.jpg", // استبدل بالرابط الصحيح
   },
 });
+
+export const formatDateTime = (
+  date: string | number,
+  time: string | number
+) => {
+  // إذا كان date عدد (timestamp)
+  const isTimestamp = typeof date === "number" || typeof time === "number";
+
+  if (isTimestamp) {
+    const d = new Date(date || time); // استخدم أي منهما
+    const formattedDate = d.toLocaleDateString(); // مثال: 5/6/2025
+    const formattedTime = d.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }); // مثال: 14:30
+    return `${formattedDate}, ${formattedTime}`;
+  }
+
+  // إذا كانت قيم نصية مسبقًا
+  return `${date}, ${time}`;
+};

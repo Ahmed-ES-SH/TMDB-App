@@ -31,6 +31,8 @@ export interface ShowType {
   title: string;
   release_date: string;
   genres: gener[];
+  runtime: number;
+  number_of_episodes: number;
 }
 
 export interface fullMovie {
@@ -51,4 +53,26 @@ export interface fullMovie {
   release_date: string;
   genres: gener[];
   runtime: number;
+}
+
+export interface commentType {
+  content: string;
+  author: string;
+  date: string | number;
+  time: string | number;
+  likes: number;
+  dislikes: number;
+}
+
+export interface ReviewType {
+  content: string;
+  title: string;
+  date: string | number;
+  time: string | number;
+  rating: number | string;
+}
+
+export interface MovieApiResponse {
+  results: ShowType[];
+  // ممكن إضافة total_pages، page، total_results... إلخ
 }

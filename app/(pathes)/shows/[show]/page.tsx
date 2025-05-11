@@ -12,24 +12,21 @@ interface props {
   };
 }
 
-export default async function page({ searchParams }: props) {
+export default async function ShowPage({ searchParams }: props) {
   //movieId
-  const movieId = searchParams?.currentId;
+  const showId = searchParams?.currentId;
 
   // CurrentMovie
-  const movie: ShowType = await FetchData(
-    `/movie/${movieId}?language=en-US`,
-    false
-  );
+  const show: ShowType = await FetchData(`/tv/${showId}?language=en-US`, false);
 
   //similarMovies
-  const { results: similarMovies } = await FetchData(
-    `/movie/${movieId}/similar`,
+  const { results: similarShows } = await FetchData(
+    `/tv/${showId}/similar`,
     false
   );
 
   // Movie Trailer
-  const { results } = await FetchData(`/movie/${movieId}/videos`, false);
+  const { results } = await FetchData(`/tv/${showId}/videos`, false);
   const trailer =
     results.find(
       (item: ShowType) =>
@@ -41,11 +38,10 @@ export default async function page({ searchParams }: props) {
         item.name.toLowerCase().includes(keyword)
       )
     );
-
   return (
     <>
       {/* Display current media details (movie or TV show) */}
-      <CurrentMediaDetailes media={movie} />
+      <CurrentMediaDetailes media={show} />
 
       {/* Display media comments and user reviews */}
       <MediaCommentsAndReviews />
@@ -53,9 +49,9 @@ export default async function page({ searchParams }: props) {
       <div className="my-4">
         {/* Slider showing top-rated similar movies */}
         <SliderTopRated
-          bigTitle="Similar Movies"
-          dataType="movies"
-          data={similarMovies}
+          bigTitle="Similar Shows"
+          dataType="shows"
+          data={similarShows}
         />
       </div>
 

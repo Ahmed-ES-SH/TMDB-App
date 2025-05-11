@@ -1,5 +1,4 @@
 import React from "react";
-// import TrendingDataShow from "./TrendingDataShow";
 import TrendingHeader from "../../_client/TrendingHeader";
 import TrendingMovies from "./TrendingMovies";
 import FetchData from "@/app/hooks/FetchData";

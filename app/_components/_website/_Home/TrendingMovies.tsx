@@ -47,8 +47,8 @@ export default function TrendingMovies({ data }: props) {
         >
           {/* Movie Content */}
           <CurrentSlideComponent
-            currentMovie={currentMovie}
-            movieGenres={movieGenres}
+            currentSlide={currentMovie}
+            currentGenres={movieGenres}
           />
 
           {/* Slider Of Movies */}

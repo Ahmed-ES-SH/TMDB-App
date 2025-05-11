@@ -37,7 +37,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="custom-container h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
+    <div className="w-full h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
       <div className="w-[95%] mx-auto flex items-center justify-between">
         <div className="flex items-center gap-1">
           <span className="text-primary_blue ">{`${currentPage} `}</span>

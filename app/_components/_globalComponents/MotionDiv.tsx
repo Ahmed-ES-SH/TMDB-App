@@ -1,8 +1,14 @@
 "use client";
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
-export default function MotionDiv({ children, variants, className }) {
+interface props {
+  children: React.ReactNode;
+  className: string;
+  variants?: Variants | undefined;
+}
+
+export default function MotionDiv({ children, variants, className }: props) {
   return (
     <motion.div
       className={className}

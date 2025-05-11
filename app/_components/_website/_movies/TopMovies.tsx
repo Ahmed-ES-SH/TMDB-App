@@ -1,14 +1,16 @@
 import { TopratedMovies } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import React from "react";
-import MovieCard from "./MovieCard";
 import getGenres from "@/app/hooks/FetchGenres";
 import MotionDiv from "../../_globalComponents/MotionDiv";
+import MediaCard from "./MediaCard";
+import { ShowType } from "@/app/types/websiteTypes";
+import { gener } from "@/app/types/ContextType";
 
 export default async function TopMovies() {
   const { results } = await FetchData(TopratedMovies, false);
   const genres = await getGenres();
-  const genreMap = genres && new Map(genres.map((g) => [g.id, g.name]));
+  const genreMap = genres && new Map(genres.map((g: gener) => [g.id, g.name]));
 
   const variants = {
     hidden: {
@@ -35,12 +37,19 @@ export default async function TopMovies() {
       >
         {results &&
           results.length > 0 &&
-          results.slice(0, 10).map((movie, index) => {
-            const movieGenres = movie.genre_ids.map((id) => ({
+          results.slice(0, 10).map((media: ShowType, index: number) => {
+            const movieGenres = media.genre_ids.map((id) => ({
               id,
               name: genreMap.get(id),
             }));
-            return <MovieCard key={index} genres={movieGenres} movie={movie} />;
+            return (
+              <MediaCard
+                key={index}
+                genres={movieGenres}
+                media={media}
+                index={index}
+              />
+            );
           })}
       </MotionDiv>
     </>

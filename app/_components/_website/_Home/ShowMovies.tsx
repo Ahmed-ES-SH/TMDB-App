@@ -8,11 +8,16 @@ import {
   upcomingMovies,
 } from "@/app/constants/apis";
 import { useData } from "@/app/context/DataContext";
-import MovieCard from "../_movies/MovieCard";
 import { gener } from "@/app/types/ContextType";
 import "../../../Css/loader.css";
-import useFetchData from "@/app/hooks/FetchClientData";
 import { useVariables } from "@/app/context/VariablesContext";
+import MediaCard from "../_movies/MediaCard";
+import { useFetchData } from "@/app/hooks/FetchClientData";
+
+interface DataType {
+  results: ShowType[];
+  total_pages: number;
+}
 
 export default function ShowMovies() {
   const { genres } = useData();
@@ -23,9 +28,9 @@ export default function ShowMovies() {
   );
 
   // Fetch The Data
-  const { data, totalPages, loading } = useFetchData<{
-    results: ShowType[];
-  }>(currentApi, true);
+  const { data, isLoading, error } = useFetchData<DataType>(currentApi, true);
+
+  const totalPages = data && data.total_pages;
 
   useEffect(() => {
     // Set API and reset page when category changes
@@ -59,7 +64,11 @@ export default function ShowMovies() {
     setCurrentApi(apiWithPage);
   }, [currentPage]); // Trigger when currentPage changes
 
-  if (loading)
+  // Show The Error In Console
+
+  if (error) console.log(error);
+
+  if (isLoading)
     return (
       <div className="w-full h-screen fixed top-0 left-0 z-[99] bg-thired_dash flex items-center justify-center">
         <span className="loader"></span>
@@ -70,29 +79,31 @@ export default function ShowMovies() {
     <>
       <div className="custom-container grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4">
         {data &&
-          data.results.map((movie: ShowType, index: number) => {
+          data.results.map((media: ShowType, index: number) => {
             const matchedGenres =
               genres &&
-              movie &&
+              media &&
               genres.filter(
                 (genre: gener) =>
-                  genre.id !== null && movie.genre_ids.includes(genre.id)
+                  genre.id !== null && media.genre_ids.includes(genre.id)
               );
             return (
-              <MovieCard
+              <MediaCard
                 index={index}
                 key={index}
-                movie={movie}
+                media={media}
                 genres={matchedGenres}
               />
             );
           })}
       </div>
-      <Pagination
-        totalPages={totalPages && totalPages > 500 ? 500 : totalPages || 500}
-        currentPage={currentPage || 1}
-        setCurrentPage={setCurrentPage as Dispatch<SetStateAction<number>>}
-      />
+      <div className="custom-container">
+        <Pagination
+          totalPages={totalPages && totalPages > 500 ? 500 : totalPages || 500}
+          currentPage={currentPage || 1}
+          setCurrentPage={setCurrentPage as Dispatch<SetStateAction<number>>}
+        />
+      </div>
     </>
   );
 }

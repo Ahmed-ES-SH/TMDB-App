@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { ShowType } from "./websiteTypes";
 
 export interface gener {
   id: number | null;
@@ -28,4 +29,22 @@ export interface VariablesTypes {
   >;
   trailerState: boolean;
   setTrailerState: Dispatch<SetStateAction<boolean>>;
+}
+
+export interface ListContextType {
+  favoritesList: ShowType[];
+  setFavoritesList: Dispatch<SetStateAction<ShowType[]>>;
+  watchedList: ShowType[];
+  setWatchedList: Dispatch<SetStateAction<ShowType[]>>;
+  watchList: ShowType[];
+  setWatchList: Dispatch<SetStateAction<ShowType[]>>;
+  handleAddMedia: (
+    setList: Dispatch<SetStateAction<ShowType[]>>,
+    media: ShowType
+  ) => void;
+  handleDeleteMedia: (
+    setList: Dispatch<SetStateAction<ShowType[]>>,
+    media: ShowType
+  ) => void;
+  handleAddMediaToWatchedlist: (media: ShowType) => void;
 }

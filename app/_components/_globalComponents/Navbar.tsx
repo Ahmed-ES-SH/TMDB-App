@@ -81,7 +81,9 @@ export default function Navbar() {
             </div>
             <div className="right flex items-center gap-0 lg:gap-4">
               <div className="relative">
-                <InputSearchData />
+                <div className="hidden lg:block">
+                  <InputSearchData />
+                </div>
                 <ResponsiveSearchBar />
               </div>
               <Link href={"/signin"} className="flex items-center gap-2 group ">

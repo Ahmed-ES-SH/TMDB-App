@@ -7,8 +7,8 @@ import {
   useState,
 } from "react";
 import { DataContextType, gener } from "../types/ContextType";
-import useFetchData from "../hooks/FetchClientData";
 import { genersMovies, genresShows } from "../constants/apis";
+import { useFetchData } from "../hooks/FetchClientData";
 
 type Props = {
   children: ReactNode;
@@ -21,9 +21,13 @@ const DataProvider = ({ children }: Props) => {
   const [genres_Shows, setGenres_Shows] = useState<gener[]>([]);
 
   const { data: moviesGenres } = useFetchData<{ genres: gener[] }>(
-    genersMovies
+    genersMovies,
+    false
   );
-  const { data: showsGenres } = useFetchData<{ genres: gener[] }>(genresShows);
+  const { data: showsGenres } = useFetchData<{ genres: gener[] }>(
+    genresShows,
+    false
+  );
 
   useEffect(() => {
     if (moviesGenres) {

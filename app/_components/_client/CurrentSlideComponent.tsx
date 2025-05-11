@@ -8,10 +8,13 @@ import { CiCalendarDate } from "react-icons/ci";
 import { TbChartBarPopular } from "react-icons/tb";
 import { gener } from "@/app/types/ContextType";
 import { useVariables } from "@/app/context/VariablesContext";
+import { useList } from "@/app/context/ListContext";
+import { useRouter } from "next/navigation";
+import { formatTitle } from "@/app/_helpers/helpers";
 
 interface props {
-  currentMovie: ShowType;
-  movieGenres: gener[] | undefined;
+  currentSlide: ShowType;
+  currentGenres: gener[] | undefined;
 }
 
 type btntype = {
@@ -21,34 +24,53 @@ type btntype = {
 };
 
 export default function CurrentSlideComponent({
-  currentMovie,
-  movieGenres,
+  currentSlide,
+  currentGenres,
 }: props) {
+  // Fetch status to determine any data will appear
   const { trendingState } = useVariables();
+
+  // Destructure list manipulation functions from the custom useList hook for adding media and updating watch lists
+  const { handleAddMedia, handleAddMediaToWatchedlist, setWatchList } =
+    useList();
+
+  // get useRouter
+  const router = useRouter();
+
+  const handleGOToMedia = () => {
+    router.push(
+      `/${
+        currentSlide.media_type != "movie" ? "shows" : "movies"
+      }/${formatTitle(currentSlide.title || currentSlide.name)}?currentId=${
+        currentSlide.id
+      }`
+    );
+  };
+
   const btns: btntype[] = [
     {
       bg_color: "bg-yellow-400 ", // لون يدل على الحفظ أو الإضافة للقائمة
       text: "Watch List",
-      handle: () => console.log("watch List"),
+      handle: () => handleAddMedia(setWatchList, currentSlide),
     },
     {
       bg_color: "bg-red-500 ", // لون يدل على الانتهاء أو المشاهدة
       text: "Watched",
-      handle: () => console.log("Watched"),
+      handle: () => handleAddMediaToWatchedlist(currentSlide),
     },
     {
       bg_color: "bg-blue-600 ", // لون يدل على الحركة أو المتابعة
       text: `Go to ${trendingState == "movies" ? "Movie" : "Show"}`,
-      handle: () => console.log("Go to movie"),
+      handle: () => handleGOToMedia(),
     },
   ];
 
-  const movieDetails = [
+  const mediaDetails = [
     {
       icon: <CiCalendarDate className="text-primary_blue xl:size-6 size-5 " />,
       value: new Date(
-        currentMovie?.release_date ||
-          currentMovie?.first_air_date ||
+        currentSlide?.release_date ||
+          currentSlide?.first_air_date ||
           "2000-01-01"
       ).getFullYear(),
     },
@@ -56,18 +78,19 @@ export default function CurrentSlideComponent({
       icon: (
         <TbChartBarPopular className="text-primary_blue xl:size-6 size-5 " />
       ),
-      value: Number(currentMovie?.popularity).toFixed(2),
+      value: Number(currentSlide?.popularity).toFixed(2),
     },
     {
       icon: <FaLanguage className="text-primary_blue xl:size-6 size-5 " />,
-      value: currentMovie?.original_language,
+      value: currentSlide?.original_language,
     },
   ];
+
   return (
     <>
       <AnimatePresence mode="wait">
         <motion.div
-          key={currentMovie?.id}
+          key={currentSlide?.id}
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -30 }}
@@ -75,7 +98,7 @@ export default function CurrentSlideComponent({
           className="movie flex flex-col items-start gap-10 w-full xl:w-3/4 xl:h-full h-1/2 lg:px-6 px-2 py-2 relative z-10 pb-4"
         >
           <motion.div
-            key={currentMovie?.backdrop_path}
+            key={currentSlide?.backdrop_path}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -83,7 +106,7 @@ export default function CurrentSlideComponent({
             className="top-0 left-0 bg-center bg-cover opacity-50 -z-10  w-full h-full absolute"
           >
             <Img
-              src={`https://image.tmdb.org/t/p/w500${currentMovie?.backdrop_path}`}
+              src={`https://image.tmdb.org/t/p/w500${currentSlide?.backdrop_path}`}
               className="w-full h-full object-cover"
               loading="eager"
             />
@@ -97,7 +120,7 @@ export default function CurrentSlideComponent({
             className="flex items-center justify-between mt-4 w-full"
           >
             <h1 className="italic font-bold text-secondery-green text-2xl md:text-4xl xl:text-6xl font-mono">
-              {currentMovie?.title || currentMovie?.name}
+              {currentSlide?.title || currentSlide?.name}
             </h1>
 
             <motion.div
@@ -108,7 +131,7 @@ export default function CurrentSlideComponent({
             >
               <FaStar className=" text-yellow-400" />
               <span className="text-white max-lg:text-[14px]">
-                {Number(currentMovie?.vote_average).toFixed(2)}
+                {Number(currentSlide?.vote_average).toFixed(2)}
               </span>
             </motion.div>
           </motion.div>
@@ -120,7 +143,7 @@ export default function CurrentSlideComponent({
             transition={{ delay: 0.4 }}
             className="xl:text-xl md:text-xl text-lg text-gray-300"
           >
-            {currentMovie?.overview}
+            {currentSlide?.overview}
           </motion.p>
 
           {/* التفاصيل */}
@@ -130,7 +153,7 @@ export default function CurrentSlideComponent({
             transition={{ delay: 0.5 }}
             className="flex items-center gap-12 flex-wrap"
           >
-            {movieDetails.map((item, index) => (
+            {mediaDetails.map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 10 * (index + 1) }}
@@ -153,17 +176,18 @@ export default function CurrentSlideComponent({
             transition={{ delay: 0.8 }}
             className="flex items-center gap-4 flex-wrap"
           >
-            {movieGenres?.map((genre, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.85 + index * 0.05 }}
-                className="p-2 bg-primary_blue text-white rounded-r-md hover:bg-white hover:text-black cursor-pointer duration-300"
-              >
-                {genre?.name}
-              </motion.div>
-            ))}
+            {currentGenres &&
+              currentGenres?.map((genre, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.85 + index * 0.05 }}
+                  className="p-2 bg-primary_blue text-white rounded-r-md hover:bg-white hover:text-black cursor-pointer duration-300"
+                >
+                  {genre?.name}
+                </motion.div>
+              ))}
           </motion.div>
 
           {/* الأزرار */}

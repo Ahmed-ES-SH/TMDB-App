@@ -1,4 +1,6 @@
 "use client";
+import { useList } from "@/app/context/ListContext";
+import { ShowType } from "@/app/types/websiteTypes";
 import React from "react";
 
 type btntype = {
@@ -7,17 +9,23 @@ type btntype = {
   handle: () => void;
 };
 
-export default function MainBTNS() {
+interface props {
+  media: ShowType;
+}
+
+export default function MainBTNS({ media }: props) {
+  const { handleAddMedia, handleAddMediaToWatchedlist, setWatchList } =
+    useList();
   const btns: btntype[] = [
     {
       bg_color: "bg-yellow-400 ", // لون يدل على الحفظ أو الإضافة للقائمة
       text: "Watch List",
-      handle: () => console.log("watch List"),
+      handle: () => handleAddMedia(setWatchList, media),
     },
     {
       bg_color: "bg-red-500 ", // لون يدل على الانتهاء أو المشاهدة
       text: "Watched",
-      handle: () => console.log("Watched"),
+      handle: () => handleAddMediaToWatchedlist(media),
     },
   ];
   return (

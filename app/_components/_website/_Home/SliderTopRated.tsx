@@ -3,11 +3,11 @@ import { ShowType } from "@/app/types/websiteTypes";
 import React, { useRef } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Swiper as SwiperType } from "swiper/types";
-import MovieCard from "../_movies/MovieCard";
 import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import SliderHeader from "../../_client/SliderHeader";
 import { useData } from "@/app/context/DataContext";
+import MediaCard from "../_movies/MediaCard";
 
 interface props {
   data: ShowType[];
@@ -45,7 +45,7 @@ export default function SliderTopRated({ data, dataType, bigTitle }: props) {
             slidesPerView: 3,
             spaceBetween: 20,
           },
-          1024: {
+          1240: {
             slidesPerView: 4,
             spaceBetween: 25,
           },
@@ -72,7 +72,7 @@ export default function SliderTopRated({ data, dataType, bigTitle }: props) {
               );
             return (
               <SwiperSlide key={index}>
-                <MovieCard movie={item} index={index} genres={matchedGenres} />
+                <MediaCard media={item} index={index} genres={matchedGenres} />
               </SwiperSlide>
             );
           })}

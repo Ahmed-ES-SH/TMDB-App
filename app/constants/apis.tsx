@@ -8,4 +8,5 @@ export const popularTvShow = "/tv/popular?language=en-US&";
 export const PopularMovies = "/movie/popular?language=en-US&";
 export const nowPlaying = "/movie/now_playing?language=en-US&";
 export const latestShows = "/movie/now_playing?language=en-US&";
+export const latestMoviesApi = "/movie/latest";
 export const upcomingMovies = "/movie/upcoming?language=en-US&";

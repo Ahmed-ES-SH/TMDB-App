@@ -47,8 +47,8 @@ export default function TrendingShows({ data }: props) {
           {/* Slider Of Movies */}
           <SliderTrending data={data} setCurrent={setcurrentSlideId} />
           <CurrentSlideComponent
-            currentMovie={currentShow}
-            movieGenres={ShowGenres}
+            currentSlide={currentShow}
+            currentGenres={ShowGenres}
           />
         </motion.div>
       )}
