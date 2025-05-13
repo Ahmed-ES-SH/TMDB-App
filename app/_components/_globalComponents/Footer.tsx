@@ -62,10 +62,10 @@ export default function Footer() {
         </div>
 
         <div className="flex gap-4 text-xl">
-          <FaInstagram />
-          <FaFacebook />
-          <FaTwitter />
-          <FaPinterestP />
+          <FaInstagram className="hover:-translate-y-2 duration-300 cursor-pointer" />
+          <FaFacebook className="hover:-translate-y-2 duration-300 cursor-pointer" />
+          <FaTwitter className="hover:-translate-y-2 duration-300 cursor-pointer" />
+          <FaPinterestP className="hover:-translate-y-2 duration-300 cursor-pointer" />
         </div>
       </div>
 

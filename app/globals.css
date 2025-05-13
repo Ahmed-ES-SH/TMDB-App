@@ -39,6 +39,7 @@
   --breakpoint-3xl: 1800px;
   --color-secondary: var(--secondary);
   --animate-wiggle: wiggle 1s ease-in-out infinite;
+  --breakpoint-3xl: 1680px;
 }
 
 ::-webkit-scrollbar {
@@ -47,13 +48,10 @@
 
 ::-webkit-scrollbar-thumb {
   background-color: #3498db;
-  /* لون القلم */
-
-  /* شكل الزوايا */
 }
 
 ::-webkit-scrollbar-track {
-  background-color: #f0f0f0;
+  background-color: var(--fourth_color);
   /* لون الخلفية */
 }
 

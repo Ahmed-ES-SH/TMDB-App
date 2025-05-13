@@ -1,9 +1,10 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
 import React from "react";
 
 interface props {
-  opation: string[];
+  opation: { text: string; link?: string }[];
   className: string;
   dropState: boolean;
 }
@@ -29,13 +30,14 @@ export default function Dropdown({
           className={className}
         >
           <ul>
-            {opation.map((title) => (
-              <li
-                className="p-1 hover:text-primary_blue duration-200 cursor-pointer"
-                key={title}
+            {opation.map((link) => (
+              <Link
+                href={link.link ? link.link : "#"}
+                className="block p-1 hover:text-primary_blue duration-200 cursor-pointer"
+                key={link.text}
               >
-                {title}
-              </li>
+                {link.text}
+              </Link>
             ))}
           </ul>
         </motion.div>

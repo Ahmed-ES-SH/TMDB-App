@@ -71,7 +71,7 @@ export default function AddReviewOrComment({
         {showState == "reviews" && (
           <div className="flex items-center justify-between w-full max-md:flex-col gap-4 2xl:gap-8">
             <input
-              className="max-md:w-full 2xl:flex-2/3 p-2 rounded-xl bg-fourth_color text-gray-200 border-none outline-none placeholder:text-white placeholder:font-light placeholder:px-2 focus:ring-2 focus:ring-sky-300 duration-300"
+              className="max-md:w-full flex-2/3 p-2 rounded-xl bg-fourth_color text-gray-200 border-none outline-none placeholder:text-white placeholder:font-light placeholder:px-2 focus:ring-2 focus:ring-sky-300 duration-300"
               type="text"
               placeholder="Review Title .... "
               name="review_title"
@@ -84,7 +84,7 @@ export default function AddReviewOrComment({
               onChange={handleRatChange}
               max={10}
               type="text"
-              className=" max-md:w-full  2xl:flex-1 p-2 rounded-xl bg-fourth_color text-gray-200 border-none outline-none placeholder:text-white placeholder:font-light placeholder:px-2 focus:ring-2 focus:ring-sky-300 duration-300"
+              className=" max-md:w-full  flex-1 p-2 rounded-xl bg-fourth_color text-gray-200 border-none outline-none placeholder:text-white placeholder:font-light placeholder:px-2 focus:ring-2 focus:ring-sky-300 duration-300"
             />
           </div>
         )}

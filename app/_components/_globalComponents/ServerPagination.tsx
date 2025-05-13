@@ -1,17 +1,17 @@
-"use client";
-import React, { Dispatch, SetStateAction } from "react";
+import Link from "next/link";
+import React from "react";
 import { BsArrowLeftShort, BsArrowRightShort } from "react-icons/bs";
 
 interface props {
   currentPage: number;
   totalPages: number;
-  setCurrentPage?: Dispatch<SetStateAction<number>> | undefined;
+  usedURL: string;
 }
 
-export default function Pagination({
+export default function ServerPagination({
   currentPage,
   totalPages,
-  setCurrentPage,
+  usedURL,
 }: props) {
   const getPagination = () => {
     const pages = new Set<number>();
@@ -30,12 +30,6 @@ export default function Pagination({
 
   const paginationNumbers = getPagination();
 
-  const handlePageChange = (newPage: number) => {
-    if (setCurrentPage && newPage >= 1 && newPage <= totalPages) {
-      setCurrentPage(newPage);
-    }
-  };
-
   return (
     <div className="w-full h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
       <div className="w-[95%] mx-auto flex items-center justify-between">
@@ -45,13 +39,12 @@ export default function Pagination({
           <span className="text-secondery-green ">{` ${totalPages}`}</span>
         </div>
         <div className="flex items-center gap-3">
-          <button
-            disabled={currentPage === 1}
-            onClick={() => handlePageChange(currentPage - 1)}
+          <Link
+            href={`${usedURL}?page=${currentPage - 1}`}
             className="w-8 h-8 max-md:w-6 max-md:h-6 flex items-center justify-center text-white bg-thired_dash rounded-md disabled:cursor-not-allowed disabled:opacity-50"
           >
             <BsArrowLeftShort className="size-6" />
-          </button>
+          </Link>
 
           <div className="flex items-center gap-2">
             {paginationNumbers.map((page: number, index) => {
@@ -61,8 +54,8 @@ export default function Pagination({
               return (
                 <React.Fragment key={page}>
                   {isEllipsis && <span className="text-white px-2">...</span>}
-                  <div
-                    onClick={() => handlePageChange(page)}
+                  <Link
+                    href={`${usedURL}?page=${page}`}
                     className={`cursor-pointer px-4 py-1 max-md:px-2 max-md:py-0.5 flex items-center justify-center rounded-md ${
                       page === currentPage
                         ? "bg-primary_blue text-white"
@@ -70,19 +63,18 @@ export default function Pagination({
                     }`}
                   >
                     {page}
-                  </div>
+                  </Link>
                 </React.Fragment>
               );
             })}
           </div>
 
-          <button
-            disabled={currentPage === totalPages}
-            onClick={() => handlePageChange(currentPage + 1)}
+          <Link
+            href={`${usedURL}?page=${currentPage + 1}`}
             className="w-8 h-8 max-md:w-6 max-md:h-6 flex items-center justify-center text-white bg-thired_dash rounded-md disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <BsArrowRightShort className="size-6" />
-          </button>
+          </Link>
         </div>
       </div>
     </div>

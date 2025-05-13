@@ -14,7 +14,7 @@ interface props {
 export default function Comment({ comment }: props) {
   return (
     <>
-      <div className="w-full p-3 rounded-xl bg-fourth_color my-3 text-white">
+      <div className="w-full p-3  rounded-xl bg-fourth_color my-3 text-white">
         <div className="flex flex-col">
           {/* Comment Detailes */}
           <div className="w-full flex items-start gap-3 pb-4 border-b border-gray-700">
@@ -29,13 +29,13 @@ export default function Comment({ comment }: props) {
             </div>
           </div>
           {/* Comment Content */}
-          <p className="block my-4 text-lg text-gray-200 leading-12 pb-4 border-b border-gray-700">
+          <p className="block my-4 text-lg text-gray-200 leading-6 pb-4 border-b border-gray-700 max-sm:text-[13px]">
             {comment.content}
           </p>
           {/* Comment Actions */}
-          <div className=" flex items-center justify-between w-full">
+          <div className=" flex items-center justify-between max-sm:flex-col max-sm:gap-4 w-full">
             <div className="flex items-center gap-5">
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <div className="w-5 h-5 rounded-lg flex items-center justify-center bg-transparent border  cursor-pointer border-green-300 text-green-300 hover:text-green-500 hover:border-green-500 duration-300">
                   <GoPlus className="size-4" />
                 </div>
@@ -43,7 +43,7 @@ export default function Comment({ comment }: props) {
                   {comment.likes}
                 </span>
               </div>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <span className="text-[14px] text-gray-300">
                   {comment.dislikes}
                 </span>

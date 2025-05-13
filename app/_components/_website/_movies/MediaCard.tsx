@@ -1,3 +1,4 @@
+"use client";
 import Img from "../../_globalComponents/Img";
 import { ShowType } from "@/app/types/websiteTypes";
 import { gener } from "@/app/types/ContextType";
@@ -7,6 +8,7 @@ import { formatTitle } from "@/app/_helpers/helpers";
 import { motion } from "framer-motion";
 import IconsCard from "./IconsCard";
 import HeartIcon from "./HeartIcon";
+
 interface props {
   media: ShowType;
   genres: gener[];
@@ -64,7 +66,7 @@ export default function MediaCard({
         {/* media Title + release_date */}
         <div className="flex flex-col gap-2 items-center justify-center w-fit mx-auto absolute -bottom-[20%] group-hover:bottom-[12%] duration-700 left-1/2 -translate-x-1/2">
           <Link
-            href={`/${media.name ? "shows" : "medias"}/${formatTitle(
+            href={`/${media.name ? "shows" : "movies"}/${formatTitle(
               media.title || media.name
             )}?currentId=${media.id}`}
             className="text-xl text-gray-200 whitespace-nowrap hover:text-sky-400 duration-200"

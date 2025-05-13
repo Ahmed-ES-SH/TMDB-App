@@ -27,7 +27,7 @@ export default function CurrentMediaDetailes({ media }: props) {
   console.log(media);
   return (
     <>
-      <div className="w-full min-h-screen relative mt-20 flex  items-center justify-start">
+      <div className="w-full min-h-screen relative mt-20 pb-3 flex  items-center justify-start">
         <Img
           className="w-full h-3/4 object-cover absolute top-0 left-0 z-[2] mask-b-from-1 "
           src={`https://image.tmdb.org/t/p/w500${
@@ -64,9 +64,9 @@ export default function CurrentMediaDetailes({ media }: props) {
               <div className="flex items-center gap-2">
                 <FaCircle className="size-2 text-primary_blue" />
                 <p className="text-gray-200 text-[15px]">
-                  {media.media_type == "movie"
-                    ? runTime
-                    : `${media.number_of_episodes}  Episodes`}
+                  {media.name
+                    ? `${media.number_of_episodes}  Episodes`
+                    : runTime}
                 </p>
               </div>
             </div>

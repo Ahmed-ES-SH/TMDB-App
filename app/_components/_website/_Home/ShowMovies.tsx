@@ -62,7 +62,7 @@ export default function ShowMovies() {
     }
     const apiWithPage = `${currentApi.split("page=")[0]}page=${currentPage}`;
     setCurrentApi(apiWithPage);
-  }, [currentPage]); // Trigger when currentPage changes
+  }, [currentApi, currentPage]); // Trigger when currentPage changes
 
   // Show The Error In Console
 

@@ -29,6 +29,8 @@ export interface VariablesTypes {
   >;
   trailerState: boolean;
   setTrailerState: Dispatch<SetStateAction<boolean>>;
+  showSidebar: boolean;
+  setShowSidebar: Dispatch<SetStateAction<boolean>>;
 }
 
 export interface ListContextType {

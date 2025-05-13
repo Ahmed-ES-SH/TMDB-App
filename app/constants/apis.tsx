@@ -10,3 +10,5 @@ export const nowPlaying = "/movie/now_playing?language=en-US&";
 export const latestShows = "/movie/now_playing?language=en-US&";
 export const latestMoviesApi = "/movie/latest";
 export const upcomingMovies = "/movie/upcoming?language=en-US&";
+export const upcomingShows = "/tv/popular?language=en-US&";
+// GET https://api.themoviedb.org/3/discover/movie?with_genres=28&language=en-US&page=1

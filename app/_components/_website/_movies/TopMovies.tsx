@@ -1,4 +1,4 @@
-import { TopratedMovies } from "@/app/constants/apis";
+import { genersMovies, TopratedMovies } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import React from "react";
 import getGenres from "@/app/hooks/FetchGenres";
@@ -9,7 +9,7 @@ import { gener } from "@/app/types/ContextType";
 
 export default async function TopMovies() {
   const { results } = await FetchData(TopratedMovies, false);
-  const genres = await getGenres();
+  const genres = await getGenres(genersMovies);
   const genreMap = genres && new Map(genres.map((g: gener) => [g.id, g.name]));
 
   const variants = {

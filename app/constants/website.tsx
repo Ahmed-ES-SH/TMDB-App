@@ -1,17 +1,46 @@
 import { commentType, ReviewType } from "../types/websiteTypes";
+import { TiBook } from "react-icons/ti";
+import { TbTicket } from "react-icons/tb";
+import { PiScreencastBold, PiDownloadBold } from "react-icons/pi";
+import { MdRecommend, MdOutlineDevicesOther } from "react-icons/md";
+import { RiParentFill } from "react-icons/ri";
+import { FaStream } from "react-icons/fa";
 
 //navbar
 export const opation_nav = [
-  "About us",
-  "profile",
-  "Contacts",
-  "Interview",
-  "Admin pages",
-  "Privacy policy",
-  "Sign in",
-  "Sign up",
-  "Forgot password",
-  "404 Page",
+  { text: "About us", link: "/about" },
+  { text: "profile", link: "/profile" },
+  { text: "Contacts" },
+  { text: "Interview" },
+  { text: "Admin pages" },
+  { text: "Privacy policy" },
+  { text: "Sign in" },
+  { text: "Sign up" },
+  { text: "Forgot password" },
+  { text: "404 Page" },
+];
+
+export const navLinks = [
+  {
+    label: "Home",
+    href: "/",
+    type: "link",
+  },
+  {
+    label: "Shows",
+    type: "custom", // عنصر مخصص (ليس رابطًا فعليًا)
+    href: "/shows",
+  },
+  {
+    label: "Movies",
+    href: "/movies",
+    type: "link",
+  },
+  {
+    label: "Pricing plans",
+    href: "/pricing",
+    type: "link",
+  },
 ];
 
 //footer
@@ -64,6 +93,27 @@ export const sharedOptions = [
   "TV channels",
 ];
 
+// All Plans Section
+export const AllSharedOptions = [
+  { text: "FlixTV Originals", status: [true, true, true] },
+  {
+    text: "Get unlimited access to the largest streaming library with no ads",
+    status: [true, true, true],
+  },
+  {
+    text: "Watch Live TV online and on supported devices",
+    status: [true, true, true],
+  },
+  { text: "Switch plans or cancel anytime", status: [true, true, true] },
+  {
+    text: "Record live TV with 50 hours of Cloud DVR storage",
+    status: [false, true, true],
+  },
+  { text: "Stream 65+ top Live", status: [false, true, true] },
+  { text: "TV channels", status: [false, false, true] },
+  { text: "", buttons: [true, true, true] },
+];
+
 export const plans = [
   {
     title: "Reguler",
@@ -79,6 +129,24 @@ export const plans = [
     title: "Premium + TV channels",
     price: 49.99,
     icons: [true, true, true, true],
+  },
+];
+
+export const plansWithAllOpations = [
+  {
+    title: "Reguler",
+    price: 11.99,
+    icons: [true, true, true, true, false, false, false],
+  },
+  {
+    title: "Premium",
+    price: 34.99,
+    icons: [true, true, true, true, true, true, false],
+  },
+  {
+    title: "Premium + TV channels",
+    price: 49.99,
+    icons: [true, true, true, true, true, true, true],
   },
 ];
 
@@ -406,5 +474,92 @@ export const Reviews: ReviewType[] = [
     date: "2025-05-05",
     time: "22:19",
     rating: 9.5,
+  },
+];
+
+// partners
+export const partners = [
+  "/website/partners/3docean-light-background.png",
+  "/website/partners/activeden-light-background.png",
+  "/website/partners/audiojungle-light-background.png",
+  "/website/partners/codecanyon-light-background.png",
+  "/website/partners/photodune-light-background.png",
+  "/website/partners/themeforest-light-background.png",
+  "/website/partners/codecanyon-light-background.png",
+  "/website/partners/photodune-light-background.png",
+  "/website/partners/codecanyon-light-background.png",
+];
+
+// about
+const iconStyle = "size-10 text-primary_blue";
+export const cards = [
+  {
+    number: "01",
+    title: "Choose your Plan",
+    content:
+      "It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining",
+  },
+  {
+    number: "02",
+    title: "Create an account",
+    content:
+      "All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first",
+  },
+  {
+    number: "03",
+    title: "Enjoy FlixTV",
+    content:
+      "It to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting",
+  },
+];
+
+export const FeaturesCards = [
+  {
+    title: "Extensive Library",
+    content:
+      "Access thousands of movies, series, and documentaries across all genres in one place.",
+    icon: <TiBook className={`${iconStyle}`} />,
+  },
+  {
+    title: "Event Tickets",
+    content:
+      "Buy tickets for exclusive online premieres and virtual events directly from the platform.",
+    icon: <TbTicket className={`${iconStyle}`} />,
+  },
+  {
+    title: "Interactive Screenings",
+    content:
+      "Join live screenings with real-time chats and polls to engage with other viewers.",
+    icon: <PiScreencastBold className={`${iconStyle}`} />,
+  },
+  {
+    title: "High-Quality Streaming",
+    content:
+      "Stream 4K and HDR content smoothly with minimal buffering and crisp audio.",
+    icon: <FaStream className={`${iconStyle}`} />,
+  },
+  {
+    title: "Personalized Recommendations",
+    content:
+      "Get suggestions tailored to your taste using our advanced AI recommendation engine.",
+    icon: <MdRecommend className={`${iconStyle}`} />,
+  },
+  {
+    title: "Offline Viewing",
+    content:
+      "Download your favorite content to watch offline anytime, anywhere.",
+    icon: <PiDownloadBold className={`${iconStyle}`} />,
+  },
+  {
+    title: "Parental Controls",
+    content:
+      "Set viewing restrictions and monitor your child's content with our parental tools.",
+    icon: <RiParentFill className={`${iconStyle}`} />,
+  },
+  {
+    title: "Multi-Device Support",
+    content:
+      "Enjoy seamless streaming on phones, tablets, smart TVs, and desktops.",
+    icon: <MdOutlineDevicesOther className={`${iconStyle}`} />,
   },
 ];

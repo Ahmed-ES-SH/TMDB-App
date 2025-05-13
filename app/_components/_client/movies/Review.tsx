@@ -11,22 +11,22 @@ interface props {
 export default function Review({ review }: props) {
   return (
     <>
-      <div className="w-full p-3 rounded-xl bg-fourth_color my-3 text-white">
+      <div className="w-full p-3 rounded-xl bg-fourth_color my-3 text-white relative">
         <div className="flex flex-col">
           {/* Comment Detailes */}
-          <div className="w-full flex items-center justify-between gap-2 pb-4 border-b border-gray-700">
-            <div className="flex items-start gap-3">
+          <div className="w-full flex items-center max-md:items-start justify-between max-md:flex-col gap-2 pb-4 border-b border-gray-700">
+            <div className="flex items-start max-md:flex-col gap-3">
               <div className="w-12 h-12 bg-gray-200 flex items-center justify-center rounded-md">
                 <CiUser className="text-primary_blue size-6 md:size-8" />
               </div>
               <div className="flex flex-col gap-2">
-                <h4 className="text-lg">{review.title}</h4>
+                <h4 className="text-lg max-md:text-[16px]">{review.title}</h4>
                 <span className="text-[12px]">
                   {formatDateTime(review.date, review.time)}
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 max-md:absolute max-md:top-2 max-md:right-2">
               <IoStarOutline className="text-primary_blue" />
               <span className="text-[14px]">
                 {Number(review.rating).toFixed(1)}
@@ -34,7 +34,7 @@ export default function Review({ review }: props) {
             </div>
           </div>
           {/* Comment Content */}
-          <p className="block my-4 text-lg text-gray-200 leading-12 border-gray-700">
+          <p className="block my-4 text-lg text-gray-200 leading-6 max-md:text-[15px] border-gray-700">
             {review.content}
           </p>
         </div>

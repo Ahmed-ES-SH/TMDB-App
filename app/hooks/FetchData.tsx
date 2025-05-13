@@ -3,6 +3,7 @@ import { gener } from "../types/ContextType";
 let cachedGenres: gener[] | null = null;
 
 export default async function FetchData(api: string, paginationState: boolean) {
+  const ApiKey = process.env.TMDB_API_KEY;
   try {
     // إذا كانت التصنيفات مخزنة بالفعل في الذاكرة، إرجاعها مباشرة
     if (api === "/genre/movie/list?language=en" && cachedGenres) {
@@ -13,8 +14,7 @@ export default async function FetchData(api: string, paginationState: boolean) {
       method: "GET",
       headers: {
         accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJiMWYxZDc3NmExNWZkYmRiNDZiMjYxMDhmOTllNWIxOSIsIm5iZiI6MTcwNDE3MTY3MC4zMTYsInN1YiI6IjY1OTM5ODk2NjUxZmNmNWYxMzhmM2I1MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.0ISUadhplmr0xjyyfV5FZfu-s2pNJAn9BbAjSjasBXg",
+        Authorization: `Bearer ${ApiKey}`,
       },
     };
 

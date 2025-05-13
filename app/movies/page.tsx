@@ -1,9 +1,54 @@
 import React from "react";
+import { genersMovies, PopularMovies } from "../constants/apis";
+import MediaCard from "../_components/_website/_movies/MediaCard";
+import { gener } from "../types/ContextType";
+import { ShowType } from "../types/websiteTypes";
+import ServerPagination from "../_components/_globalComponents/ServerPagination";
+import FetchData from "../hooks/FetchData";
 
-export default function page() {
+interface props {
+  searchParams?: { page?: string };
+}
+
+export default async function page({ searchParams }: props) {
+  const { genres } = await FetchData(genersMovies, false);
+  const currentPage = Number(searchParams?.page || 1);
+
+  const { data, total_pages } = await FetchData(
+    `${PopularMovies}page=${currentPage}`,
+    true
+  );
+
   return (
     <>
-      <div className="w-full"></div>
+      <div className="w-[95%] max-md:w-full max-md:p-2 mb-3 mx-auto mt-20">
+        <div className="w-full  grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4 xl:gap-5">
+          {data &&
+            data.results.length > 0 &&
+            data.results.map((show: ShowType, index: number) => {
+              const matchedGenres =
+                genres &&
+                genres.filter((genre: gener) =>
+                  show.genre_ids.includes(genre.id as number)
+                );
+
+              return (
+                <MediaCard
+                  index={index}
+                  key={index}
+                  media={show}
+                  genres={matchedGenres}
+                />
+              );
+            })}
+        </div>
+
+        <ServerPagination
+          usedURL="/movies"
+          currentPage={currentPage}
+          totalPages={total_pages}
+        />
+      </div>
     </>
   );
 }

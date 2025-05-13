@@ -2,6 +2,7 @@ import CurrentMediaDetailes from "@/app/_components/_client/mediaPage/CurrentMed
 import MediaCommentsAndReviews from "@/app/_components/_client/movies/MediaCommentsAndReviews";
 import SliderTopRated from "@/app/_components/_website/_Home/SliderTopRated";
 import MediaTrailer from "@/app/_components/_website/_movies/MediaTrailer";
+import { upcomingMovies } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
 import React from "react";
@@ -28,6 +29,13 @@ export default async function page({ searchParams }: props) {
     false
   );
 
+  // upComingMovies
+
+  const { results: upComingMovies } = await FetchData(
+    `${upcomingMovies}page=1`,
+    false
+  );
+
   // Movie Trailer
   const { results } = await FetchData(`/movie/${movieId}/videos`, false);
   const trailer =
@@ -48,14 +56,18 @@ export default async function page({ searchParams }: props) {
       <CurrentMediaDetailes media={movie} />
 
       {/* Display media comments and user reviews */}
-      <MediaCommentsAndReviews />
+      <MediaCommentsAndReviews data={upComingMovies} />
 
       <div className="my-4">
         {/* Slider showing top-rated similar movies */}
         <SliderTopRated
           bigTitle="Similar Movies"
           dataType="movies"
-          data={similarMovies}
+          data={
+            similarMovies && similarMovies.length > 0
+              ? similarMovies
+              : upComingMovies
+          }
         />
       </div>
 

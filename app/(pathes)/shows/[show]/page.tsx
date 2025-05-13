@@ -2,6 +2,7 @@ import CurrentMediaDetailes from "@/app/_components/_client/mediaPage/CurrentMed
 import MediaCommentsAndReviews from "@/app/_components/_client/movies/MediaCommentsAndReviews";
 import SliderTopRated from "@/app/_components/_website/_Home/SliderTopRated";
 import MediaTrailer from "@/app/_components/_website/_movies/MediaTrailer";
+import { upcomingShows } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
 import React from "react";
@@ -25,6 +26,12 @@ export default async function ShowPage({ searchParams }: props) {
     false
   );
 
+  // upComingShows
+  const { results: upComingShows } = await FetchData(
+    `${upcomingShows}page=1`,
+    false
+  );
+
   // Movie Trailer
   const { results } = await FetchData(`/tv/${showId}/videos`, false);
   const trailer =
@@ -44,14 +51,18 @@ export default async function ShowPage({ searchParams }: props) {
       <CurrentMediaDetailes media={show} />
 
       {/* Display media comments and user reviews */}
-      <MediaCommentsAndReviews />
+      <MediaCommentsAndReviews data={upComingShows} />
 
       <div className="my-4">
         {/* Slider showing top-rated similar movies */}
         <SliderTopRated
           bigTitle="Similar Shows"
           dataType="shows"
-          data={similarShows}
+          data={
+            similarShows && similarShows.length > 0
+              ? similarShows
+              : upcomingShows
+          }
         />
       </div>
 

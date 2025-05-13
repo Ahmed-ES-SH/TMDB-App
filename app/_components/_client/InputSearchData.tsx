@@ -49,7 +49,7 @@ export default function InputSearchData() {
 
   const handleGo = (media: ShowType) => {
     router.push(
-      `/${media.media_type == "movie" ? "movies" : "shows"}/${formatTitle(
+      `/${media.name ? "shows" : "movies"}/${formatTitle(
         media.title || media.name
       )}?currentId=${media.id}`
     );

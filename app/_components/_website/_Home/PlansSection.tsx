@@ -7,8 +7,10 @@ export default function PlansSection() {
   return (
     <>
       <div className="head custom-container my-6 pt-4 border-t border-primary_blue">
-        <h1 className="text-5xl font-bold text-white my-2">Select Your Plan</h1>
-        <p className="text-white text-xl font-light">
+        <h1 className="lg:text-5xl text-2xl font-bold text-white my-2">
+          Select Your Plan
+        </h1>
+        <p className="text-white lg:text-xl text-[18px] font-light">
           No hidden fees, equipment rentals, or installation appointments.
         </p>
       </div>

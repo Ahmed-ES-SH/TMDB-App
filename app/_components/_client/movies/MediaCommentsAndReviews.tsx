@@ -4,20 +4,18 @@ import React, { useState } from "react";
 import Comment from "./Comment";
 import Review from "./Review";
 import { motion } from "framer-motion";
-import {
-  commentType,
-  MovieApiResponse,
-  ReviewType,
-} from "@/app/types/websiteTypes";
+import { commentType, ReviewType, ShowType } from "@/app/types/websiteTypes";
 import Pagination from "../../_globalComponents/Pagination";
 import { CgNotifications } from "react-icons/cg";
-import { useFetchData } from "@/app/hooks/FetchClientData";
-import { upcomingMovies } from "@/app/constants/apis";
 import MovieCard from "../../_website/_movies/MediaCard";
 import { useData } from "@/app/context/DataContext";
 import AddReview from "../mediaPage/AddReviewOrComment";
 
-export default function MediaCommentsAndReviews() {
+interface props {
+  data: ShowType[];
+}
+
+export default function MediaCommentsAndReviews({ data }: props) {
   const { genres } = useData();
   const [comments, setComments] = useState<commentType[]>(Itemcomments);
   const [reviews, setReviews] = useState<ReviewType[]>(Reviews);
@@ -28,13 +26,6 @@ export default function MediaCommentsAndReviews() {
   const [content, setContent] = useState("");
   const [reviewRating, setReviewRating] = useState<number | string>("");
   const [reviewTitle, setReviewTitle] = useState<string>("");
-
-  const { data } = useFetchData<MovieApiResponse>(
-    `${upcomingMovies}page=1`,
-    false
-  );
-
-  const upComingMovies = data?.results;
 
   const ITEMS_PER_PAGE = 7;
 
@@ -196,11 +187,11 @@ export default function MediaCommentsAndReviews() {
           {/* Coming Soon */}
           <div id="upComing-items">
             <h1 className="my-3 text-3xl text-gray-100 pb-2 border-b border-primary_blue w-fit mx-auto hidden 2xl:block">
-              Coming Soon
+              {data[0].name ? "Popular Shows" : "Coming Soon"}
             </h1>
             <div className="grid-cols-1 gap-3 mt-4 hidden 2xl:grid ">
-              {upComingMovies &&
-                upComingMovies.slice(0, 3).map((media, index) => {
+              {data &&
+                data.slice(0, 3).map((media, index) => {
                   const matchedGenres =
                     genres &&
                     media &&
