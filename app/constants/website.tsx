@@ -10,14 +10,12 @@ import { FaStream } from "react-icons/fa";
 export const opation_nav = [
   { text: "About us", link: "/about" },
   { text: "profile", link: "/profile" },
-  { text: "Contacts" },
-  { text: "Interview" },
-  { text: "Admin pages" },
-  { text: "Privacy policy" },
-  { text: "Sign in" },
+  { text: "Contactus", link: "/contactus" },
+  { text: "Privacy policy", link: "/privacypolicy" },
+  { text: "Sign in", link: "/signin" },
   { text: "Sign up" },
-  { text: "Forgot password" },
-  { text: "404 Page" },
+  { text: "Forgot password", link: "/forgetpassword" },
+  { text: "404 Page", link: "/not-found" },
 ];
 
 export const navLinks = [

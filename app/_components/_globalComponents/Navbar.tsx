@@ -75,7 +75,7 @@ export default function Navbar() {
                 <PiSignIn className="size-6 text-primary_blue group-hover:text-green-500 duration-300" />
               </Link>
               <div className="flex items-center gap-2 group ">
-                <div className="w-8 h-8 border cursor-pointer">
+                <div className="w-8 h-8  cursor-pointer">
                   <Img
                     src="/website/avatar.jpg"
                     className="w-full h-full object-cover rounded-full"

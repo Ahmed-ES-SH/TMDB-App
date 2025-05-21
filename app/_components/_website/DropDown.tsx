@@ -1,9 +1,11 @@
 "use client";
+import { useVariables } from "@/app/context/VariablesContext";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import React from "react";
+import { useRouter } from "next/navigation";
+import React, { Dispatch, SetStateAction } from "react";
 
 interface props {
+  setShowDrop: Dispatch<SetStateAction<boolean>>;
   opation: { text: string; link?: string }[];
   className: string;
   dropState: boolean;
@@ -15,10 +17,18 @@ const dropdownVariants = {
 };
 
 export default function Dropdown({
+  setShowDrop,
   opation,
   className = "",
   dropState,
 }: props) {
+  const {} = useVariables();
+  const router = useRouter();
+
+  const handleGo = (path: string) => {
+    router.push(path);
+    setShowDrop(false);
+  };
   return (
     <AnimatePresence>
       {dropState && (
@@ -31,13 +41,13 @@ export default function Dropdown({
         >
           <ul>
             {opation.map((link) => (
-              <Link
-                href={link.link ? link.link : "#"}
+              <div
+                onClick={() => handleGo(link.link ? link.link : "#")}
                 className="block p-1 hover:text-primary_blue duration-200 cursor-pointer"
                 key={link.text}
               >
                 {link.text}
-              </Link>
+              </div>
             ))}
           </ul>
         </motion.div>
