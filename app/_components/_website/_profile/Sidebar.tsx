@@ -7,8 +7,14 @@ import { MdLogout } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { useVariables } from "@/app/context/VariablesContext";
 import { motion, AnimatePresence } from "framer-motion";
+import { useClerk, useUser } from "@clerk/nextjs";
+import Loading from "@/app/(pathes)/shows/loading";
+import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
+  const router = useRouter();
+  const { signOut } = useClerk();
+  const { user } = useUser();
   const { showSidebar, setShowSidebar, width } = useVariables();
   const iconStyle = "text-red-500";
   const profileOptions = [
@@ -34,24 +40,11 @@ export default function Sidebar() {
     },
   ];
 
-  const bottomOpations = [
-    {
-      text: "Home",
-      icon: <FaHome className={`${iconStyle}`} />,
-      link: "#",
-    },
-    {
-      text: "Log out",
-      icon: <MdLogout className={`${iconStyle}`} />,
-      link: "#",
-    },
-  ];
-
   useEffect(() => {
     if (width >= 1024) {
       setShowSidebar(true);
     }
-  }, [width]);
+  }, [setShowSidebar, width]);
 
   const fadeInVariants = {
     hidden: {
@@ -71,6 +64,17 @@ export default function Sidebar() {
       x: 20,
     },
   };
+
+  useEffect(() => {
+    if (!user) router.push("/signin");
+  }, [router, user]);
+
+  const handleLogout = async () => {
+    await signOut();
+    router.push("/"); // بعد تسجيل الخروج نعيد التوجيه للصفحة الرئيسية (يمكن تغييرها حسب حاجتك)
+  };
+
+  if (!user) return <Loading />;
 
   return (
     <>
@@ -97,11 +101,13 @@ export default function Sidebar() {
               {/* Avatar */}
               <div className="lg:w-48 lg:h-48 w-32 h-32 mx-auto rounded-full flex items-center justify-center border-2 border-sky-400">
                 <Img
-                  src="/website/avatar.jpg"
+                  src={user.imageUrl}
                   className="w-full h-full rounded-full object-cover"
                 />
               </div>
-              <p className="my-2 text-white text-center">Ahmed Esmail</p>
+              <p className="my-2 text-white text-center">
+                {user.fullName || "No Name Found"}
+              </p>
               <div className="flex flex-col w-full gap-4 mt-8">
                 {profileOptions.map((opation, index) => (
                   <Link
@@ -119,18 +125,20 @@ export default function Sidebar() {
             </div>
             <div className="bottom w-full p-4">
               <div className="flex flex-col gap-4 w-full">
-                {bottomOpations.map((opation, index) => (
-                  <Link
-                    href={opation.link}
-                    key={index}
-                    className="flex items-center justify-between w-full"
-                  >
-                    <p className="text-red-400 hover:text-red-500">
-                      {opation.text}
-                    </p>
-                    {opation.icon}
-                  </Link>
-                ))}
+                <Link
+                  href={"/"}
+                  className="flex items-center justify-between w-full"
+                >
+                  <p className="text-red-400 hover:text-red-500">Home</p>
+                  <FaHome className={`${iconStyle}`} />
+                </Link>
+                <div
+                  onClick={handleLogout}
+                  className=" cursor-pointer flex items-center justify-between w-full"
+                >
+                  <p className="text-red-400 hover:text-red-500">Log out</p>
+                  <MdLogout className={`${iconStyle}`} />
+                </div>
               </div>
             </div>
           </motion.div>

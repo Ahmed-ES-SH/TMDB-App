@@ -21,7 +21,7 @@ export default function DotsNavbar() {
         <Dropdown
           setShowDrop={setShowDrop}
           dropState={showDrop}
-          className=" w-[180px] h-[200px] absolute overflow-y-auto p-2 rounded-md bg-thired_dash text-white z-[20]"
+          className=" w-[180px] h-[200px] absolute overflow-y-auto p-2 rounded-md bg-thired_dash text-white z-[999]"
           opation={opation_nav}
         />
       </div>

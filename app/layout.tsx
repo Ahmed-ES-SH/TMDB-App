@@ -3,6 +3,8 @@ import { Roboto } from "next/font/google";
 import Navbar from "./_components/_globalComponents/Navbar";
 import Footer from "./_components/_globalComponents/Footer";
 import ClientLayout from "./_components/_globalComponents/ClientLayout";
+import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "sonner";
 import "./globals.css";
 
 const FontRoboto = Roboto({
@@ -23,11 +25,14 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={`${FontRoboto.className} antialiased`}>
-        <ClientLayout>
-          <Navbar />
-          {children}
-          <Footer />
-        </ClientLayout>
+        <ClerkProvider>
+          <ClientLayout>
+            <Navbar />
+            <Toaster richColors position="top-right" />
+            {children}
+            <Footer />
+          </ClientLayout>
+        </ClerkProvider>
       </body>
     </html>
   );

@@ -35,7 +35,7 @@ export default function Contactus() {
         <h1 className="text-gray-200 text-2xl xl:text-5xl mb-12">Contact Us</h1>
         <div className="max-lg:flex-col flex items-start justify-between w-full gap-6 mt-12">
           {/* Form  */}
-          <form className="flex-2/3 p-3 lg:p-6 border border-gray-800 rounded-xl">
+          <form className="flex-2/3 max-lg:w-full p-3 lg:p-6 border border-gray-800 rounded-xl">
             <div className="max-lg:flex-col flex items-center justify-between gap-4 w-full">
               <input
                 type="text"

@@ -13,7 +13,7 @@ export const opation_nav = [
   { text: "Contactus", link: "/contactus" },
   { text: "Privacy policy", link: "/privacypolicy" },
   { text: "Sign in", link: "/signin" },
-  { text: "Sign up" },
+  { text: "Sign up", link: "/signup" },
   { text: "Forgot password", link: "/forgetpassword" },
   { text: "404 Page", link: "/not-found" },
 ];
