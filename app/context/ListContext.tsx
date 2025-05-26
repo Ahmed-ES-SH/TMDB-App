@@ -10,6 +10,7 @@ import {
 } from "react";
 import { ListContextType } from "../types/ContextType";
 import { ShowType } from "../types/websiteTypes";
+import { toast } from "sonner";
 
 type Props = {
   children: ReactNode;
@@ -32,7 +33,11 @@ export default function ListProvider({ children }: Props) {
       const isMediaExisting = prevList.some(
         (current) => current.id === media.id
       );
-      return isMediaExisting ? prevList : [...prevList, media];
+      if (!isMediaExisting) {
+        toast.success("Media added successfully.");
+        return [...prevList, media];
+      }
+      return prevList;
     });
   };
 
@@ -44,6 +49,7 @@ export default function ListProvider({ children }: Props) {
     setList((prevList) =>
       prevList.filter((current) => current.id !== media.id)
     );
+    toast.error("Removed Media Done.");
   };
 
   // handleAddMedia To Watched
@@ -55,6 +61,11 @@ export default function ListProvider({ children }: Props) {
       setWatchList((prevData) =>
         prevData.filter((current) => current.id !== media.id)
       );
+      toast.info("Media has been removed from your watch list.");
+      toast.success("Media has been successfully added to your watched list.");
+    } else {
+      setWatchList((prevData) => [...prevData, media]);
+      toast.success("Media has been successfully added to your watch list.");
     }
 
     // ثم أضفه إلى watchedList إذا لم يكن موجودًا

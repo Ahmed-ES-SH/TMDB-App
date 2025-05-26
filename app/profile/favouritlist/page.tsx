@@ -22,13 +22,12 @@ export default function FavouritList() {
           favouritList.map((media, index) => {
             const isShow = media.name || false;
             const matchedGenres =
-              genres &&
-              genres_Shows &&
-              media &&
-              (isShow ? genres_Shows : genres).filter(
-                (genre) =>
-                  genre.id !== null && media.genre_ids.includes(genre.id)
-              );
+              genres && genres_Shows && media && Array.isArray(media.genre_ids)
+                ? (isShow ? genres_Shows : genres).filter(
+                    (genre) =>
+                      genre.id !== null && media.genre_ids.includes(genre.id)
+                  )
+                : [];
             return (
               <MediaCard
                 key={index}
