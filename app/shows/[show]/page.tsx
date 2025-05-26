@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CurrentMediaDetailes from "@/app/_components/_client/mediaPage/CurrentMediaDetailes";
 import MediaCommentsAndReviews from "@/app/_components/_client/movies/MediaCommentsAndReviews";
 import SliderTopRated from "@/app/_components/_website/_Home/SliderTopRated";
@@ -7,15 +8,9 @@ import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
 import React from "react";
 
-interface props {
-  searchParams: {
-    currentId?: string;
-  };
-}
-
-export default async function ShowPage({ searchParams }: props) {
+export default async function ShowPage({ params, searchParams }: any) {
   //movieId
-  const showId = searchParams?.currentId;
+  const showId = searchParams?.currentId?.toString() || params.show;
 
   // CurrentMovie
   const show: ShowType = await FetchData(`/tv/${showId}?language=en-US`, false);

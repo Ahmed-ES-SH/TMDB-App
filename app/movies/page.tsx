@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from "react";
 import { genersMovies, PopularMovies } from "../constants/apis";
 import MediaCard from "../_components/_website/_movies/MediaCard";
@@ -6,11 +7,7 @@ import { ShowType } from "../types/websiteTypes";
 import ServerPagination from "../_components/_globalComponents/ServerPagination";
 import FetchData from "../hooks/FetchData";
 
-interface props {
-  searchParams?: { page?: string };
-}
-
-export default async function page({ searchParams }: props) {
+export default async function page({ searchParams }: any) {
   const { genres } = await FetchData(genersMovies, false);
   const currentPage = Number(searchParams?.page || 1);
 
@@ -46,7 +43,7 @@ export default async function page({ searchParams }: props) {
         <ServerPagination
           usedURL="/movies"
           currentPage={currentPage}
-          totalPages={total_pages}
+          totalPages={total_pages >= 500 ? 500 : total_pages}
         />
       </div>
     </>

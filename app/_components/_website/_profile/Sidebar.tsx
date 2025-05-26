@@ -8,8 +8,8 @@ import { RxCross1 } from "react-icons/rx";
 import { useVariables } from "@/app/context/VariablesContext";
 import { motion, AnimatePresence } from "framer-motion";
 import { useClerk, useUser } from "@clerk/nextjs";
-import Loading from "@/app/(pathes)/shows/loading";
 import { useRouter } from "next/navigation";
+import Loading from "@/app/shows/loading";
 
 export default function Sidebar() {
   const router = useRouter();

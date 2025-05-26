@@ -3,9 +3,9 @@ import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import Img from "@/app/_components/_globalComponents/Img";
 import { useSignIn, useUser } from "@clerk/nextjs";
-import Loading from "@/app/(pathes)/shows/loading";
 import { useRouter } from "next/navigation";
 import SigninForm from "@/app/_components/_client/auth/SigninForm";
+import Loading from "@/app/shows/loading";
 
 export default function SignInPage() {
   const router = useRouter();

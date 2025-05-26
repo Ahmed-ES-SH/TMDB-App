@@ -1,13 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import ShowsBody from "@/app/_components/_website/_shows/ShowsBody";
 import { genresShows } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import React from "react";
 
-interface props {
-  searchParams?: { page?: string };
-}
-
-export default async function ShowsPage({ searchParams }: props) {
+export default async function ShowsPage({ searchParams }: any) {
   const genres = await FetchData(genresShows, false);
   const showGenres = genres.genres;
   const currentPage = Number(searchParams?.page || 1);

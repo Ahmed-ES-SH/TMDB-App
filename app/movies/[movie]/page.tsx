@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import CurrentMediaDetailes from "@/app/_components/_client/mediaPage/CurrentMediaDetailes";
 import MediaCommentsAndReviews from "@/app/_components/_client/movies/MediaCommentsAndReviews";
 import SliderTopRated from "@/app/_components/_website/_Home/SliderTopRated";
@@ -7,13 +8,7 @@ import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
 import React from "react";
 
-interface props {
-  searchParams: {
-    currentId?: string;
-  };
-}
-
-export default async function page({ searchParams }: props) {
+export default async function page({ searchParams }: any) {
   //movieId
   const movieId = searchParams?.currentId;
 

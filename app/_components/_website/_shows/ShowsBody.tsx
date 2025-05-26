@@ -42,7 +42,7 @@ export default async function ShowsBody({ showGenres, currentPage }: props) {
       <ServerPagination
         usedURL="/shows"
         currentPage={currentPage}
-        totalPages={total_pages}
+        totalPages={total_pages >= 500 ? 500 : total_pages}
       />
     </>
   );
