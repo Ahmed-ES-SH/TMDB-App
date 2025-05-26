@@ -29,16 +29,21 @@ export default function ListProvider({ children }: Props) {
     setList: Dispatch<SetStateAction<ShowType[]>>,
     media: ShowType
   ) => {
+    let alreadyExists = false;
+
     setList((prevList) => {
-      const isMediaExisting = prevList.some(
-        (current) => current.id === media.id
-      );
-      if (!isMediaExisting) {
-        toast.success("Media added successfully.");
+      alreadyExists = prevList.some((current) => current.id === media.id);
+      if (!alreadyExists) {
         return [...prevList, media];
       }
       return prevList;
     });
+
+    if (alreadyExists) {
+      toast.info("Media already exists in the list.");
+    } else {
+      toast.success("Media added successfully.");
+    }
   };
 
   // handleDeleteMedia
@@ -54,26 +59,30 @@ export default function ListProvider({ children }: Props) {
 
   // handleAddMedia To Watched
   const handleAddMediaToWatchedlist = (media: ShowType) => {
-    // تحقق أولاً إن كان العنصر موجودًا في watchList
     const isInWatchList = watchList.some((current) => current.id === media.id);
 
     if (isInWatchList) {
       setWatchList((prevData) =>
         prevData.filter((current) => current.id !== media.id)
       );
-      toast.info("Media has been removed from your watch list.");
-      toast.success("Media has been successfully added to your watched list.");
+      toast.info("Media has been moved from your watch list to watched list.");
     } else {
       setWatchList((prevData) => [...prevData, media]);
-      toast.success("Media has been successfully added to your watch list.");
+      toast.success("Media has been added to your watch list.");
     }
 
-    // ثم أضفه إلى watchedList إذا لم يكن موجودًا
+    // أضفه إلى watchedList فقط إذا لم يكن موجودًا بالفعل
     setWatchedList((prevList) => {
       const isMediaExisting = prevList.some(
         (current) => current.id === media.id
       );
-      return isMediaExisting ? prevList : [...prevList, media];
+      if (!isMediaExisting) {
+        toast.success("Media has been added to your watched list.");
+        return [...prevList, media];
+      } else {
+        toast.info("Media is already in your watched list.");
+        return prevList;
+      }
     });
   };
 
