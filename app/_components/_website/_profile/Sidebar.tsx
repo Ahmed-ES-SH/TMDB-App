@@ -71,7 +71,7 @@ export default function Sidebar() {
 
   const handleLogout = async () => {
     await signOut();
-    router.push("/"); // بعد تسجيل الخروج نعيد التوجيه للصفحة الرئيسية (يمكن تغييرها حسب حاجتك)
+    router.push("/signin");
   };
 
   if (!user) return <Loading />;
