@@ -77,7 +77,7 @@ export default function ShowMovies() {
 
   return (
     <>
-      <div className="custom-container grid grid-cols-[repeat(auto-fit,minmax(350px,1fr))] gap-4">
+      <div className="custom-container grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4">
         {data &&
           data.results.map((media: ShowType, index: number) => {
             const matchedGenres =
