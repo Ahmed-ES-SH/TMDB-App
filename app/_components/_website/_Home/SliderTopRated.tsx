@@ -33,8 +33,12 @@ export default function SliderTopRated({ data, dataType, bigTitle }: props) {
           pauseOnMouseEnter: true,
         }}
         breakpoints={{
-          320: {
+          0: {
             slidesPerView: 1,
+            spaceBetween: 0,
+          },
+          320: {
+            slidesPerView: 2,
             spaceBetween: 10,
           },
           480: {

@@ -55,7 +55,7 @@ export default function FilterMoviesSection() {
 
   return (
     <>
-      <div className="custom-container h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
+      <div className="custom-container h-[70px] bg-fourth_color rounded-xl flex items-center justify-center mt-6">
         <div className="flex items-center justify-between w-[97%] max-md:w-full mx-auto">
           {/* <div className="relative">
             <div
@@ -117,7 +117,7 @@ export default function FilterMoviesSection() {
                     : "text-white"
                 }`}
               >
-                <p>{cat.text}</p>
+                <p className="max-sm:text-[11px]">{cat.text}</p>
               </div>
             ))}
           </div>

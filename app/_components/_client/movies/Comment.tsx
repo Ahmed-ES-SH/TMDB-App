@@ -1,6 +1,7 @@
+"use client";
 import { formatDateTime } from "@/app/_helpers/helpers";
 import { commentType } from "@/app/types/websiteTypes";
-import React from "react";
+import React, { useState } from "react";
 import { CiUser } from "react-icons/ci";
 import { GoPlus } from "react-icons/go";
 import { HiOutlineMinus } from "react-icons/hi2";
@@ -12,6 +13,9 @@ interface props {
 }
 
 export default function Comment({ comment }: props) {
+  const [likes, setLikes] = useState(comment.likes);
+  const [dislikes, setDislikes] = useState(comment.dislikes);
+
   return (
     <>
       <div className="w-full p-3  rounded-xl bg-fourth_color my-3 text-white">
@@ -35,17 +39,23 @@ export default function Comment({ comment }: props) {
           {/* Comment Actions */}
           <div className=" flex items-center justify-between max-sm:flex-col max-sm:gap-4 w-full">
             <div className="flex items-center gap-5">
-              <div className="flex items-center gap-2">
+              <div
+                onClick={() => setLikes((prev) => prev + 1)}
+                className="flex items-center gap-2"
+              >
                 <div className="w-5 h-5 rounded-lg flex items-center justify-center bg-transparent border  cursor-pointer border-green-300 text-green-300 hover:text-green-500 hover:border-green-500 duration-300">
                   <GoPlus className="size-4" />
                 </div>
-                <span className="text-[14px] text-gray-300">
-                  {comment.likes}
+                <span className="text-[14px] select-none text-gray-300">
+                  {likes}
                 </span>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-[14px] text-gray-300">
-                  {comment.dislikes}
+              <div
+                onClick={() => setDislikes((prev) => (prev > 0 ? prev - 1 : 0))}
+                className="flex items-center gap-2"
+              >
+                <span className="text-[14px] select-none text-gray-300">
+                  {dislikes}
                 </span>
                 <div className="w-5 h-5 rounded-lg flex items-center justify-center bg-transparent border  cursor-pointer border-red-300 text-red-300 hover:text-red-500 hover:border-red-500 duration-300">
                   <HiOutlineMinus className="size-4" />
@@ -53,11 +63,11 @@ export default function Comment({ comment }: props) {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2 cursor-pointer hover:text-primary_blue duration-300">
+              <div className="flex items-center gap-2 cursor-pointer hover:text-primary_blue duration-300 select-none">
                 <MdOutlineTurnRight className="text-primary_blue" />
                 <p>Reply</p>
               </div>
-              <div className="flex items-center gap-2 cursor-pointer hover:text-primary_blue duration-300">
+              <div className="flex items-center gap-2 cursor-pointer hover:text-primary_blue duration-300 select-none">
                 <RxLoop className="text-primary_blue" />
                 <p>Quote</p>
               </div>

@@ -55,7 +55,7 @@ export default function Footer() {
       </div>
 
       <div className="text-white text-base pt-4 w-[90%]  mx-auto flex items-center justify-between max-md:flex-col max-sm:items-start max-md:gap-8 gap-4">
-        <div className="flex items-center gap-3 w-1/2 max-md:w-fit">
+        <div className="flex items-center flex-wrap gap-3 flex-1/2 max-md:w-fit">
           <p className="border-r border-gray-400 p-2 ">Privacy Policy</p>
           <p className="border-r border-gray-400 p-2 ">Terms & Conditions</p>
           <p className=" ">Code of Conduct</p>

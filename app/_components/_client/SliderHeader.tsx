@@ -20,16 +20,16 @@ export default function SliderHeader({
   return (
     <>
       <div className="w-full my-6 ">
-        <div className="lg:w-[90%] xl:w-[80%] w-[95%] mx-auto flex items-center justify-between pt-4 border-t border-primary_blue">
+        <div className="lg:w-[90%] xl:w-[80%] w-[95%] mx-auto flex items-center justify-between flex-wrap max-md:gap-3 pt-4 border-t border-primary_blue">
           <div className="flex flex-col items-start gap-2">
-            <h6 className="text-primary_blue text-[12px] text-left">
+            <h6 className="text-primary_blue text-[12px] whitespace-nowrap py-2 text-left">
               {coloredTitle}
             </h6>
             <h2 className="xl:text-4xl lg:text-2xl text-xl text-gray-100">
               {BigTitle}
             </h2>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center max-sm:w-fit max-sm:mx-auto gap-4">
             {showbtns &&
               ["TV Shows", "Movies"].map((text, index) => (
                 <button

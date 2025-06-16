@@ -22,12 +22,13 @@ export default function Dropdown({
   className = "",
   dropState,
 }: props) {
-  const {} = useVariables();
+  const { setShowMobail } = useVariables();
   const router = useRouter();
 
   const handleGo = (path: string) => {
     router.push(path);
     setShowDrop(false);
+    setShowMobail(false);
   };
   return (
     <AnimatePresence>

@@ -1,5 +1,4 @@
 "use client";
-
 import Img from "@/app/_components/_globalComponents/Img";
 import { useUser } from "@clerk/nextjs";
 import { motion } from "framer-motion";
@@ -15,7 +14,7 @@ export default function ProfileCard() {
       initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6, ease: "easeOut" }}
-      className="w-full h-full p-8 flex flex-col justify-center items-center bg-slate-900 text-white"
+      className="w-full h-full lg:p-8 p-3 flex flex-col justify-center items-center bg-slate-900 text-white"
     >
       <div className="flex flex-col md:flex-row items-center gap-8 bg-slate-800 rounded-3xl p-10 shadow-2xl max-w-4xl w-full">
         <Img
@@ -48,7 +47,7 @@ export default function ProfileCard() {
             </div>
             <div className="flex items-center gap-4">
               <FaSignInAlt className="text-primary_blue text-2xl" />
-              <span>
+              <span className="max-sm:text-[10px]">
                 Last Sign-in:{" "}
                 {user.lastSignInAt
                   ? new Date(user.lastSignInAt).toLocaleString()

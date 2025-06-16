@@ -9,10 +9,10 @@ import {
 } from "@/app/constants/apis";
 import { useData } from "@/app/context/DataContext";
 import { gener } from "@/app/types/ContextType";
-import "../../../Css/loader.css";
 import { useVariables } from "@/app/context/VariablesContext";
 import MediaCard from "../_movies/MediaCard";
 import { useFetchData } from "@/app/hooks/FetchClientData";
+import "../../../Css/loader.css";
 
 interface DataType {
   results: ShowType[];
@@ -77,7 +77,7 @@ export default function ShowMovies() {
 
   return (
     <>
-      <div className="custom-container grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4">
+      <div className="custom-container grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] max-md:grid-cols-1 gap-4">
         {data &&
           data.results.map((media: ShowType, index: number) => {
             const matchedGenres =

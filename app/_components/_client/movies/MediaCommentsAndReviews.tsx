@@ -55,7 +55,7 @@ export default function MediaCommentsAndReviews({ data }: props) {
         dislikes: 0,
       };
 
-      setComments((prev) => [...prev, newComment]);
+      if (content.trim()) setComments((prev) => [...prev, newComment]);
     } else {
       const newReview = {
         content: content,
@@ -65,7 +65,7 @@ export default function MediaCommentsAndReviews({ data }: props) {
         rating: reviewRating,
       };
 
-      setReviews((prev) => [...prev, newReview]);
+      if (content.trim()) setReviews((prev) => [...prev, newReview]);
       setReviewRating("");
       setReviewTitle("");
     }

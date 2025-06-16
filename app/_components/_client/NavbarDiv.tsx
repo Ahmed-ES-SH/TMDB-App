@@ -1,7 +1,7 @@
 "use client";
 import { useVariables } from "@/app/context/VariablesContext";
 import { usePathname } from "next/navigation";
-import React from "react";
+import React, { useEffect } from "react";
 import { CiCircleList } from "react-icons/ci";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -12,6 +12,12 @@ interface props {
 export default function NavbarDiv({ children }: props) {
   const { scrollY, showMobail, showSidebar, setShowSidebar } = useVariables();
   const pathname = usePathname();
+
+  useEffect(() => {
+    if (!pathname.includes("/profile")) {
+      setShowSidebar(true);
+    }
+  }, [pathname, setShowSidebar]);
 
   return (
     <div

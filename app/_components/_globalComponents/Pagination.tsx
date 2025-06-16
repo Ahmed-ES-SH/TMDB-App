@@ -37,14 +37,14 @@ export default function Pagination({
   };
 
   return (
-    <div className="w-full h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
-      <div className="w-[95%] mx-auto flex items-center justify-between">
+    <div className="w-full min-h-[70px] bg-fourth_color rounded-xl p-2 flex items-center justify-center mt-6">
+      <div className="w-[95%] mx-auto max-md:flex-col max-md:gap-2 flex items-center justify-between">
         <div className="flex items-center gap-1">
           <span className="text-primary_blue ">{`${currentPage} `}</span>
           <span className="text-gray-300 "> From </span>
           <span className="text-secondery-green ">{` ${totalPages}`}</span>
         </div>
-        <div className="flex items-center gap-3">
+        <div className="flex items-center flex-wrap gap-3">
           <button
             disabled={currentPage === 1}
             onClick={() => handlePageChange(currentPage - 1)}

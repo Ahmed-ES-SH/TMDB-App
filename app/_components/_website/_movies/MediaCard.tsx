@@ -8,6 +8,7 @@ import { formatTitle } from "@/app/_helpers/helpers";
 import { motion } from "framer-motion";
 import IconsCard from "./IconsCard";
 import HeartIcon from "./HeartIcon";
+import { useState } from "react";
 
 interface props {
   media: ShowType;
@@ -22,6 +23,7 @@ export default function MediaCard({
   height = "h-[500px]",
   index,
 }: props) {
+  const [isTouched, setIsTouched] = useState(false);
   const mediaYear = new Date(
     media.release_date || media.first_air_date
   ).getFullYear();
@@ -29,18 +31,31 @@ export default function MediaCard({
   return (
     <>
       <motion.div
+        onTouchStart={() => setIsTouched(true)} // عند اللمس
+        onMouseLeave={() => setIsTouched(false)} // يرجع للوضع العادي على الأجهزة التي فيها فأرة
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3, delay: index * 0.2 }}
-        className={`w-full relative cursor-pointer group rounded-md overflow-hidden ${height} `}
+        className={`w-full  relative cursor-pointer group rounded-md overflow-hidden ${height}`}
       >
         <Img
           src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
-          className="absolute top-0 left-0 w-full h-full rounded-md object-cover "
+          className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
         />
-        <div className="w-0 h-full overflow-hidden group-hover:w-full duration-500 absolute top-0 left-0 bg-black/60 rounded-md"></div>
-        {/* Head Line & Rate + Faveroit List  */}
-        <div className="flex items-center justify-between w-full absolute -top-40 group-hover:top-2  left-1/2 -translate-x-1/2 duration-700  p-3">
+
+        {/* الغطاء الأسود الشفاف */}
+        <div
+          className={`w-0 h-full overflow-hidden duration-500 absolute top-0 left-0 bg-black/60 rounded-md ${
+            isTouched ? "w-full" : "group-hover:w-full"
+          }`}
+        ></div>
+
+        {/* التقييم والقلب */}
+        <div
+          className={`flex items-center justify-between w-full absolute left-1/2 -translate-x-1/2 duration-700 p-3 ${
+            isTouched ? "top-2" : "-top-40 group-hover:top-2"
+          }`}
+        >
           <div className="flex items-center gap-1 p-[7px] bg-thired_dash rounded-md">
             <MdOutlineStarBorderPurple500 className="size-6 text-secondery-green" />
             <p className="text-[16px] text-white">
@@ -49,25 +64,36 @@ export default function MediaCard({
           </div>
           <HeartIcon media={media} />
         </div>
-        {/* genres div */}
+
+        {/* الأنواع */}
         <div
-          className={`flex flex-col group-hover:left-0 items-start absolute top-0 -left-[50%] -translate-y-1/2 duration-700 gap-3 group-hover:top-1/2 `}
+          className={`flex flex-col items-start absolute duration-700 gap-3 ${
+            isTouched
+              ? "left-0 top-1/2 -translate-y-1/2"
+              : "group-hover:left-0 group-hover:top-1/2 top-0 -left-[80%] -translate-y-1/2"
+          }`}
         >
-          {genres &&
-            genres.slice(0, 4).map((genre, index) => (
-              <div
-                key={index}
-                className="py-2 px-4 bg-secondery-green text-gray-200 rounded-r-md hover:bg-white hover:text-black duration-200 cursor-pointer"
-              >
-                {genre?.name}
-              </div>
-            ))}
+          {genres?.slice(0, 4).map((genre, index) => (
+            <div
+              key={index}
+              className="py-2 px-4 bg-secondery-green text-gray-200 rounded-r-md hover:bg-white hover:text-black duration-200 cursor-pointer"
+            >
+              {genre?.name}
+            </div>
+          ))}
         </div>
-        {/* media Title + release_date */}
-        <div className="flex flex-col gap-2 items-center justify-center w-fit mx-auto absolute -bottom-[20%] group-hover:bottom-[12%] duration-700 left-1/2 -translate-x-1/2">
+
+        {/* العنوان وسنة الإصدار */}
+        <div
+          className={`flex flex-col gap-2 items-center justify-center w-fit mx-auto absolute left-1/2 -translate-x-1/2 duration-700 ${
+            isTouched
+              ? "bottom-[12%]"
+              : "-bottom-[20%] group-hover:bottom-[12%]"
+          }`}
+        >
           <Link
             href={`/${media.name ? "shows" : "movies"}/${formatTitle(
-              media.title || media.name
+              mediaTitle
             )}?currentId=${media.id}`}
             className="text-xl text-gray-200 whitespace-nowrap hover:text-sky-400 duration-200"
           >
@@ -77,7 +103,7 @@ export default function MediaCard({
           </Link>
           <p className="text-[14px] text-orange-400 font-bold">{mediaYear}</p>
         </div>
-        {/* Watched List + Watch List  & btns */}
+
         <IconsCard media={media} />
       </motion.div>
     </>
