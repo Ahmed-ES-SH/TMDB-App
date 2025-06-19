@@ -42,7 +42,7 @@ export default function TrendingShows({ data }: props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="xl:w-[90%] w-[98%] border border-gray-700 shadow-md mx-auto h-fit xl:h-[75vh] bg-thired_dash relative rounded-md flex items-start max-xl:flex-col max-xl:gap-4 mb-12"
+          className="xl:w-[90%] w-[98%] border border-gray-700 shadow-md mx-auto h-fit xl:min-h-[75vh] bg-thired_dash relative rounded-md flex items-start max-xl:flex-col max-xl:gap-4 mb-12"
         >
           {/* Slider Of Movies */}
           <SliderTrending data={data} setCurrent={setcurrentSlideId} />
