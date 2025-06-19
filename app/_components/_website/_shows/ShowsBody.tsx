@@ -18,7 +18,7 @@ export default async function ShowsBody({ showGenres, currentPage }: props) {
   );
   return (
     <>
-      <div className="w-full  grid grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4 xl:gap-5">
+      <div className="w-full  grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4  min-[1700px]:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] gap-4 xl:gap-5">
         {data &&
           data.results.length > 0 &&
           data.results.map((show: ShowType, index: number) => {
