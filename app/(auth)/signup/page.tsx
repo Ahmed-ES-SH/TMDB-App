@@ -12,7 +12,7 @@ export default function SignUpPage() {
 
   return (
     <>
-      <div className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-black">
+      <div className="relative w-full min-h-screen max-xl:pt-[80px] max-xl:pb-[30px] flex items-center justify-center overflow-hidden bg-black">
         {/* background */}
         <Img
           src="/website/main-bg.jpg"
