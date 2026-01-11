@@ -23,7 +23,7 @@ export default function Img({
   return (
     <>
       <Image
-        src={src}
+        src={src ?? "/noImage.png"}
         alt={alt}
         className={className}
         width={width}

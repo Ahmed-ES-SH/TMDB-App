@@ -6,7 +6,7 @@ import Link from "next/link";
 import { MdLogout } from "react-icons/md";
 import { RxCross1 } from "react-icons/rx";
 import { useVariables } from "@/app/context/VariablesContext";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, easeInOut } from "framer-motion";
 import { useClerk, useUser } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import Loading from "@/app/shows/loading";
@@ -56,7 +56,7 @@ export default function Sidebar() {
       x: 0,
       transition: {
         duration: 0.5,
-        ease: "easeInOut",
+        ease: easeInOut,
       },
     },
     exit: {
@@ -81,7 +81,7 @@ export default function Sidebar() {
       {!showSidebar && (
         <FaBars
           onClick={() => setShowSidebar(true)}
-          className="fixed top-4 left-4 z-[100] text-white size-6 cursor-pointer lg:hidden"
+          className="fixed top-4 left-4 z-100 text-white size-6 cursor-pointer lg:hidden"
         />
       )}
       <AnimatePresence>
@@ -91,7 +91,7 @@ export default function Sidebar() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="flex flex-col items-center justify-between py-6 px-2 lg:w-[23%] xl:w-[18%] bg-fourth_color max-lg:fixed top-0 left-0 z-[99] max-lg:w-[300px] max-lg:min-h-screen"
+            className="flex flex-col items-center justify-between py-6 px-2 lg:w-[23%] xl:w-[18%] bg-fourth_color max-lg:fixed top-0 left-0 z-99 max-lg:w-[300px] max-lg:min-h-screen"
           >
             <div className="top w-full p-2 pt-20">
               <RxCross1

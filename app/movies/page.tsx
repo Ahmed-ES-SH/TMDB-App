@@ -9,7 +9,7 @@ import FetchData from "../hooks/FetchData";
 
 export default async function page({ searchParams }: any) {
   const { genres } = await FetchData(genersMovies, false);
-  const currentPage = Number(searchParams?.page || 1);
+  const { currentPage } = await searchParams;
 
   const { data, total_pages } = await FetchData(
     `${PopularMovies}page=${currentPage}`,

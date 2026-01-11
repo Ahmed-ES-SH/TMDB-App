@@ -6,11 +6,10 @@ import MediaTrailer from "@/app/_components/_website/_movies/MediaTrailer";
 import { upcomingMovies } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
-import React from "react";
 
 export default async function page({ searchParams }: any) {
   //movieId
-  const movieId = searchParams?.currentId;
+  const { movieId } = await searchParams;
 
   // CurrentMovie
   const movie: ShowType = await FetchData(

@@ -6,11 +6,10 @@ import MediaTrailer from "@/app/_components/_website/_movies/MediaTrailer";
 import { upcomingShows } from "@/app/constants/apis";
 import FetchData from "@/app/hooks/FetchData";
 import { ShowType } from "@/app/types/websiteTypes";
-import React from "react";
 
-export default async function ShowPage({ params, searchParams }: any) {
+export default async function ShowPage({ searchParams }: any) {
   //movieId
-  const showId = searchParams?.currentId?.toString() || params.show;
+  const { showId } = await searchParams;
 
   // CurrentMovie
   const show: ShowType = await FetchData(`/tv/${showId}?language=en-US`, false);
