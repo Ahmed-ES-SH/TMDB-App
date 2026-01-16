@@ -9,6 +9,8 @@ export default function ProfileCard() {
 
   if (!user) return;
 
+  console.log(user);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 40 }}
@@ -23,7 +25,7 @@ export default function ProfileCard() {
           className="w-32 h-32 rounded-full border-4 border-primary_blue object-cover"
         />
 
-        <div className="flex flex-col flex-grow">
+        <div className="flex flex-col grow">
           <h2 className="text-4xl font-extrabold mb-2">
             {user.fullName || "No Name Set"}
           </h2>

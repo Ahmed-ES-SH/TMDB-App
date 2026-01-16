@@ -24,7 +24,6 @@ export default function CurrentMediaDetailes({ media }: props) {
     new Date(media.release_date || media.first_air_date).getFullYear() ||
     "unKnowun Date";
 
-  console.log(media);
   return (
     <>
       <div className="w-full min-h-screen relative mt-20 pb-3 flex  items-center justify-start">

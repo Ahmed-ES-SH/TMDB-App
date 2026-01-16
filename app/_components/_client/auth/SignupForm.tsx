@@ -1,7 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-
 import Link from "next/link";
+import React, { useEffect, useState } from "react";
 import { FaEnvelope, FaEye, FaEyeSlash, FaLock, FaUser } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useSignUp, useUser } from "@clerk/nextjs";
@@ -116,7 +115,7 @@ export default function SignupForm() {
                 {input.type == "password" && form.password.length > 0 && (
                   <div
                     onClick={handleChangePasswordFildType}
-                    className=" absolute top-1/2 -translate-y-1/2 right-4"
+                    className="absolute top-1/2 -translate-y-1/2 right-4"
                   >
                     {passwordFildType ? (
                       <FaEyeSlash className="size-5 text-gray-400 cursor-pointer" />
@@ -147,6 +146,7 @@ export default function SignupForm() {
             <motion.button
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              disabled={trySign}
               className="bg-primary_blue hover:bg-blue-600 text-white px-6 py-3 w-full rounded-lg font-semibold flex items-center justify-center gap-2 duration-300"
             >
               {trySign ? (

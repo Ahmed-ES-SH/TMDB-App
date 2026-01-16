@@ -9,14 +9,17 @@ import { ShowType } from "@/app/types/websiteTypes";
 
 export default async function ShowPage({ searchParams }: any) {
   //movieId
-  const { showId } = await searchParams;
+  const { currentId } = await searchParams;
 
   // CurrentMovie
-  const show: ShowType = await FetchData(`/tv/${showId}?language=en-US`, false);
+  const show: ShowType = await FetchData(
+    `/tv/${currentId}?language=en-US`,
+    false
+  );
 
   //similarMovies
   const { results: similarShows } = await FetchData(
-    `/tv/${showId}/similar`,
+    `/tv/${currentId}/similar`,
     false
   );
 
@@ -27,7 +30,7 @@ export default async function ShowPage({ searchParams }: any) {
   );
 
   // Movie Trailer
-  const { results } = await FetchData(`/tv/${showId}/videos`, false);
+  const { results } = await FetchData(`/tv/${currentId}/videos`, false);
   const trailer =
     results.find(
       (item: ShowType) =>

@@ -68,14 +68,6 @@ export default function Navbar() {
                 <ResponsiveSearchBar />
               </div>
               <Signinbtn />
-              {/* <div className="flex items-center gap-2 group ">
-                <div className="w-8 h-8  cursor-pointer">
-                  <Img
-                    src="/website/avatar.jpg"
-                    className="w-full h-full object-cover rounded-full"
-                  />
-                </div>
-              </div> */}
             </div>
           </div>
         </div>

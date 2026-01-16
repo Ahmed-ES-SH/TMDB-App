@@ -40,7 +40,7 @@ export default function MediaCard({
       >
         <Img
           src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
-          className="absolute top-0 left-0 w-full h-full rounded-md object-cover"
+          className="w-full h-full rounded-md object-cover"
         />
 
         {/* الغطاء الأسود الشفاف */}

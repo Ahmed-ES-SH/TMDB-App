@@ -30,7 +30,7 @@ export default function InputSearchData() {
         setSearchData([...movies, ...shows]);
         // التعامل مع البيانات هنا إذا لزم الأمر
       } catch (error: unknown) {
-        console.log(error);
+        console.error(error);
       } finally {
         setLoading(false);
       }

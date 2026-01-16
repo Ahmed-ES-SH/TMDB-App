@@ -1,8 +1,7 @@
 "use client";
 import { UserButton, useUser } from "@clerk/nextjs";
-import Link from "next/link";
-import React from "react";
 import { PiSignIn } from "react-icons/pi";
+import Link from "next/link";
 
 export default function Signinbtn() {
   const { user } = useUser();
@@ -23,6 +22,7 @@ export default function Signinbtn() {
               },
             },
           }}
+          afterSwitchSessionUrl="/"
         />
       ) : (
         <Link

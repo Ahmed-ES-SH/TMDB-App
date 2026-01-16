@@ -1,5 +1,5 @@
 "use client";
-import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Pagination from "../../_globalComponents/Pagination";
 import { ShowType } from "@/app/types/websiteTypes";
 import {
@@ -70,7 +70,7 @@ export default function ShowMovies() {
 
   if (isLoading)
     return (
-      <div className="w-full h-screen fixed top-0 left-0 z-[99] bg-thired_dash flex items-center justify-center">
+      <div className="w-full h-screen fixed top-0 left-0 z-99 bg-thired_dash flex items-center justify-center">
         <span className="loader"></span>
       </div>
     );

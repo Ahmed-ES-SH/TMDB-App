@@ -1,5 +1,4 @@
 "use client";
-import React from "react";
 import { OAuthStrategy } from "@clerk/types";
 import { useSignIn } from "@clerk/nextjs";
 import { toast } from "sonner";
